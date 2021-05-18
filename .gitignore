@@ -86,3 +86,10 @@ db_data
 
 # cloudflare worker
 wrangler.toml
+
+# vite
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local

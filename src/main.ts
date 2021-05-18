@@ -1,3 +1,6 @@
+import Bowser from 'bowser';
+import html from './index.html';
+
 const CHARACTORS_LETTERS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; //26
 const CHARACTORS_LETTERS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; //26
 const CHARACTORS_NUMBERS = '0123456789'; // 10
@@ -31,21 +34,12 @@ interface GeneratePasswordOptions {
 function generatePassword(options: GeneratePasswordOptions): string {
 	const { length } = options;
 	// initialize uintArray
-	const uIntArray = new Uint8Array(1);
+	const uIntArray = new Uint8Array(length);
 
-	const pw = [];
-	let counter = 0;
-	while (counter < length) {
-		// fill array with random bytes
-		crypto.getRandomValues(uIntArray);
+	crypto.getRandomValues(uIntArray);
+	const pw = [] as string[];
 
-		if (uIntArray[0] > CHARACTERSSTRING.length) {
-			continue;
-		}
-
-		pw.push(CHARACTERSSTRING.charAt(uIntArray[0]));
-		counter += 1;
-	}
+	uIntArray.forEach(v => pw.push(CHARACTERSSTRING.charAt(v)));
 
 	return pw.join('');
 }
@@ -66,7 +60,29 @@ async function handleRequest(request: Request): Promise<Response> {
 		length: Number(pwLength)
 	};
 	const pw = generatePassword(pwGenOptions);
-	return new Response(pw);
+	const browser = Bowser.getParser(request.headers.get('User-Agent') ?? '');
+	const validBrowser = browser.satisfies({
+		firefox: '>70',
+		edge: '>80',
+		chrome: '>80',
+		chromium: '>80',
+		safari: '>12',
+		opera: '>60'
+	});
+	if (validBrowser) {
+		const pwInjectedHTML = html.replace(/\{{password\}}/, pw);
+		return new Response(pwInjectedHTML, {
+			headers: {
+				'Content-Type': 'text/html'
+			}
+		});
+	}
+
+	return new Response(JSON.stringify({ password: pw }), {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
 }
 
 addEventListener('fetch', event => {
