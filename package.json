@@ -8,7 +8,7 @@
 		"js:dev": "nodemon",
 		"js:build": "node ./scripts/build.js --minify",
 		"wrgl": "wrangler",
-		"wrgl:pub": "yarn build && wrangler publish",
+		"wrgl:pub": "yarn js:build && wrangler publish",
 		"wrgl:dev": "wrangler dev"
 	},
 	"author": "Jan Schmidt <me@jnschmdt.de>",
