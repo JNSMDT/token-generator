@@ -4,7 +4,7 @@ const CHARACTORS_LETTERS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; //26
 const CHARACTORS_LETTERS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; //26
 const CHARACTORS_NUMBERS = '0123456789'; // 10
 const CHARACTORS_SPECIAL_1 = '*+,-_./:;@!?#$%&'; // 16
-const CHARACTORS_SPECIAL_2 = '“‘()[]^`{}~<=>'; // 14
+const CHARACTORS_SPECIAL_2 = '"\'()[]^`{}~<=>'; // 14
 
 // create characterstring from letters, numbers and special characters
 // letters are triple weight, number 4 times the normal and special character double weighted
@@ -74,7 +74,10 @@ async function handleRequest(request: Request): Promise<Response> {
 
 	return new Response(JSON.stringify({ password: pw }), {
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
+			'Access-Control-Max-Age': '86400'
 		}
 	});
 }
