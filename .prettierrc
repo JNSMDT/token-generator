@@ -14,5 +14,6 @@
   "quoteProps": "as-needed",
   "requirePragma": false,
   "tabWidth": 2,
-  "useTabs": true
+  "useTabs": true,
+  "svelteSortOrder": "options-scripts-markup-styles"
 }

@@ -1,4 +1,4 @@
-import Bowser from 'bowser';
+import { getParser } from 'bowser';
 
 const CHARACTORS_LETTERS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; //26
 const CHARACTORS_LETTERS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; //26
@@ -59,7 +59,7 @@ async function handleRequest(request: Request): Promise<Response> {
 		length: Number(pwLength)
 	};
 	const pw = generatePassword(pwGenOptions);
-	const browser = Bowser.getParser(request.headers.get('User-Agent') ?? '');
+	const browser = getParser(request.headers.get('User-Agent') ?? '');
 	const validBrowser = browser.satisfies({
 		firefox: '>70',
 		edge: '>80',
@@ -69,10 +69,10 @@ async function handleRequest(request: Request): Promise<Response> {
 		opera: '>60'
 	});
 	if (validBrowser) {
-		return Response.redirect('', 301);
+		// return Response.redirect('', 301);
 	}
-
-	return new Response(JSON.stringify({ password: pw }), {
+	const dateCreated = new Date().toISOString();
+	return new Response(JSON.stringify({ password: pw, generated: dateCreated }), {
 		headers: {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*',
