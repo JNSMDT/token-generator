@@ -1,5 +1,4 @@
 import Bowser from 'bowser';
-import html from './index.html';
 
 const CHARACTORS_LETTERS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; //26
 const CHARACTORS_LETTERS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; //26
@@ -70,12 +69,7 @@ async function handleRequest(request: Request): Promise<Response> {
 		opera: '>60'
 	});
 	if (validBrowser) {
-		const pwInjectedHTML = html.replace(/\{{password\}}/, pw);
-		return new Response(pwInjectedHTML, {
-			headers: {
-				'Content-Type': 'text/html'
-			}
-		});
+		return Response.redirect('', 301);
 	}
 
 	return new Response(JSON.stringify({ password: pw }), {
