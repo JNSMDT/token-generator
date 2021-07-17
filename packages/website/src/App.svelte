@@ -13,8 +13,13 @@
 </script>
 
 <main>
-	{pw}
+	<h1 class="text-4xl">
+		{pw}
+	</h1>
 </main>
 
-<style>
+<style global>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
 </style>
