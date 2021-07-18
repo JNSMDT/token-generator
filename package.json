@@ -1,20 +1,12 @@
 {
-	"name": "worker",
-	"version": "0.0.0",
-	"description": "cloudflare worker",
-	"main": "./dist/main.js",
-	"scripts": {
-		"dev": "concurrently \"yarn:js:dev\" \"yarn:wrgl:dev\" -k --restart-tries 5 --restart-after 1000",
-		"js:dev": "nodemon",
-		"js:build": "node ./scripts/build.js --minify",
-		"wrgl": "wrangler",
-		"wrgl:pub": "yarn js:build && wrangler publish",
-		"wrgl:dev": "wrangler dev"
-	},
+	"name": "cryptosubtle-pw-generator",
+	"version": "0.0.1",
 	"author": "Jan Schmidt <me@jnschmdt.de>",
 	"license": "MIT",
+	"workspaces":[
+		"packages/*"
+	],
 	"devDependencies": {
-		"@cloudflare/workers-types": "^2.2.2",
 		"@typescript-eslint/eslint-plugin": "^4.22.0",
 		"@typescript-eslint/parser": "^4.22.0",
 		"concurrently": "^6.1.0",
@@ -27,8 +19,5 @@
 		"nodemon": "^2.0.7",
 		"prettier": "^2.2.1",
 		"typescript": "^4.2.4"
-	},
-	"dependencies": {
-		"bowser": "^2.11.0"
 	}
 }

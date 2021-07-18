@@ -1,0 +1,21 @@
+{
+	"name": "api",
+	"version": "0.0.1",
+	"main": "./dist/main.js",
+	"scripts": {
+		"dev": "concurrently \"npm:js:dev\" \"npm:wrgl:dev\" -k --restart-tries 5 --restart-after 1000",
+		"js:dev": "nodemon",
+		"js:build": "node ./scripts/build.js --minify",
+		"wrgl": "wrangler",
+		"wrgl:pub": "npm run js:build && wrangler publish",
+		"wrgl:dev": "wrangler dev"
+	},
+	"author": "Jan Schmidt <me@jnschmdt.de>",
+	"license": "MIT",
+	"devDependencies": {
+		"@cloudflare/workers-types": "^2.2.2"
+	},
+	"dependencies": {
+		"bowser": "^2.11.0"
+	}
+}

@@ -1,11 +1,10 @@
-import Bowser from 'bowser';
-import html from './index.html';
+import { getParser } from 'bowser';
 
 const CHARACTORS_LETTERS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; //26
 const CHARACTORS_LETTERS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; //26
 const CHARACTORS_NUMBERS = '0123456789'; // 10
 const CHARACTORS_SPECIAL_1 = '*+,-_./:;@!?#$%&'; // 16
-const CHARACTORS_SPECIAL_2 = '“‘()[]^`{}~<=>'; // 14
+const CHARACTORS_SPECIAL_2 = '"\'()[]^`{}~<=>'; // 14
 
 // create characterstring from letters, numbers and special characters
 // letters are triple weight, number 4 times the normal and special character double weighted
@@ -60,7 +59,7 @@ async function handleRequest(request: Request): Promise<Response> {
 		length: Number(pwLength)
 	};
 	const pw = generatePassword(pwGenOptions);
-	const browser = Bowser.getParser(request.headers.get('User-Agent') ?? '');
+	const browser = getParser(request.headers.get('User-Agent') ?? '');
 	const validBrowser = browser.satisfies({
 		firefox: '>70',
 		edge: '>80',
@@ -70,17 +69,15 @@ async function handleRequest(request: Request): Promise<Response> {
 		opera: '>60'
 	});
 	if (validBrowser) {
-		const pwInjectedHTML = html.replace(/\{{password\}}/, pw);
-		return new Response(pwInjectedHTML, {
-			headers: {
-				'Content-Type': 'text/html'
-			}
-		});
+		// return Response.redirect('', 301);
 	}
-
-	return new Response(JSON.stringify({ password: pw }), {
+	const dateCreated = new Date().toISOString();
+	return new Response(JSON.stringify({ password: pw, generated: dateCreated }), {
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
+			'Access-Control-Max-Age': '86400'
 		}
 	});
 }
