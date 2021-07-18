@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
 	mode: 'jit',
 	purge: {
@@ -12,7 +14,11 @@ module.exports = {
 	},
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		extend: {}
+		extend: {},
+		fontFamily: {
+			sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
+			mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono]
+		}
 	},
 	variants: {
 		extend: {}

@@ -19,13 +19,16 @@
 	}
 </script>
 
-<main class="bg-green-600 px-4 py-10 grid grid-rows-3 justify-center items-center h-screen">
-	<h1 class="md:text-4xl text-3xl font-bold text-center">ngrttn pwgen 🔐</h1>
-	<h2 class="text-md font-bold text-center sm:text-3xl lg:text-4xl">
+<main class="bg-blue-300 px-4 pt-10 pb-80 grid grid-rows-3 justify-center items-center h-screen">
+	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">Cryptosubtle PWGen 🔐</h1>
+	<h2
+		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-blue-200 p-6 rounded-md"
+	>
 		{pw}
 	</h2>
 	<div class="flex gap-5 justify-center items-center">
-		<button on:click={copyToClipboard} class="bg-blue-400 py-3 px-6 font-bold">COPY PASSWORD</button
+		<button on:click={copyToClipboard} class="rounded-md bg-blue-400 py-3 px-6 font-bold"
+			>COPY PASSWORD</button
 		>
 		<button on:click={fetchPassword} class="bg-gray-400 p-2">
 			<svg
