@@ -6,7 +6,7 @@
 	onMount(fetchPassword);
 
 	async function fetchPassword() {
-		await fetch(`https://pw.ngrttn.xyz/`)
+		await fetch(`https://getpw.jnschmdt.dev/`)
 			.then(res => res.json())
 			.then(data => {
 				pw = data.password;
