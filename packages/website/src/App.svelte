@@ -6,7 +6,7 @@
 	onMount(fetchPassword);
 
 	async function fetchPassword() {
-		await fetch(`https://getpw.jnschmdt.dev/`)
+		await fetch(`https://cryptosubtle-pw-generator.angertitan.workers.dev/`)
 			.then(res => res.json())
 			.then(data => {
 				pw = data.password;
