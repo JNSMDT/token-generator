@@ -8,7 +8,7 @@ module.exports = {
 		options: {
 			defaultExtractor: content => [
 				...(content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || []),
-				...(content.match(/(?<=class:)[^=>\/\s]*/g) || [])
+				...(content.match(/(?<=class:)[^=>/\s]*/g) || [])
 			]
 		}
 	},
@@ -17,7 +17,7 @@ module.exports = {
 		extend: {},
 		fontFamily: {
 			sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
-			mono: ['Fira Mono', ...defaultTheme.fontFamily.mono]
+			mono: ['Fira Code', ...defaultTheme.fontFamily.mono]
 		}
 	},
 	variants: {
