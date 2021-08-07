@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { generatePassword } from '$lib/password';
+	// import { onMount } from 'svelte';
 
 	let pw: string;
 
-	onMount(fetchPassword);
+	// onMount(fetchPassword);
 
-	async function fetchPassword() {
-		await fetch(`https://cryptosubtle-pw-generator.angertitan.workers.dev/`)
-			.then(res => res.json())
-			.then(data => {
-				pw = data.password;
-			});
-	}
+	// async function fetchPassword() {
+	// 	await fetch(`https://cryptosubtle-pw-generator.angertitan.workers.dev/`)
+	// 		.then(res => res.json())
+	// 		.then(data => {
+	// 			pw = data.password;
+	// 		});
+	// }
 
 	async function copyToClipboard() {
 		await navigator.clipboard.writeText(pw);
@@ -30,7 +31,7 @@
 		<button on:click={copyToClipboard} class="rounded-md bg-blue-400 py-3 px-6 font-bold"
 			>COPY PASSWORD</button
 		>
-		<button on:click={fetchPassword} class="bg-gray-400 p-2">
+		<button on:click={console.log} class="bg-gray-400 p-2">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-6 w-6"
