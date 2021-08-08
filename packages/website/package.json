@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:cf": "rollup -c",
     "serve": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
@@ -19,6 +20,17 @@
     "tailwindcss": "^2.2.7",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2",
-    "vite": "^2.4.4"
+    "vite": "^2.4.4",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "eslint-plugin-svelte3": "^3.2.0",
+    "postcss-load-config": "^3.1.0",
+    "prettier-plugin-svelte": "^2.3.1",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0"
   }
 }
