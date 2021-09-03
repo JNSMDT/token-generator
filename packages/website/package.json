@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:cf": "rollup -c",
+    "dev:cf": "rollup -c -w",
     "serve": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
