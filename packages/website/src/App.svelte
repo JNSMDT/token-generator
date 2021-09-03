@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { generatePassword } from '$lib/password';
+	import { generatePassword } from '$lib/functions/password';
 	import { onMount } from 'svelte';
 	let pw: string;
+	let buttonText = 'Copy Password';
 	onMount(() => {
 		pw = generatePassword(30);
 	});
@@ -12,7 +13,14 @@
 
 	async function copyToClipboard() {
 		await navigator.clipboard.writeText(pw);
-		console.log('copied password successfully');
+		await changeButtonText();
+	}
+
+	async function changeButtonText() {
+		buttonText = 'Copied';
+		setTimeout(() => {
+			buttonText = 'Copy Password';
+		}, 2000);
 	}
 </script>
 
@@ -24,8 +32,10 @@
 		{pw}
 	</h2>
 	<div class="flex gap-5 justify-center items-center">
-		<button on:click={copyToClipboard} class="rounded-md bg-blue-400 py-3 px-6 font-bold"
-			>COPY PASSWORD</button
+		<button
+			on:click={copyToClipboard}
+			class="rounded-md w-60 bg-blue-400 py-3 px-6 font-bold hover:border-4 hover:border-blue-500"
+			>{buttonText}</button
 		>
 		<button on:click={regeneratePassword} class="bg-gray-400 p-2">
 			<svg
