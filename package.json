@@ -1,9 +1,9 @@
 {
 	"name": "cryptosubtle-pw-generator",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"author": "Jan Schmidt <me@jnschmdt.de>",
 	"license": "MIT",
-	"workspaces":[
+	"workspaces": [
 		"packages/*"
 	],
 	"devDependencies": {
