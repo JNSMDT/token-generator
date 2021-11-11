@@ -87,8 +87,10 @@ db_data
 wrangler.toml
 
 # vite
-node_modules
 .DS_Store
 dist
 dist-ssr
 *.local
+
+# svelte
+build

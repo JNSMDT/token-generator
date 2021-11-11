@@ -7,14 +7,15 @@ const CHARACTORS_NUMBERS = '0123456789'; // 10
 const CHARACTORS_SPECIAL = '*+,-_.()/@!?#$%&"\':;[]^`{}~<=>'; // 30
 
 const DEFAULT_WEIGHT = {
-	uppercase: 3,
-	lowercase: 3,
+	uppercase: 2,
+	lowercase: 2,
 	numbers: 3,
 	special: 1
 };
 
-const DEFAULT_GEN_OPTIONS: genPWOpts = {
-	forbiddenCharacters: '',
+const DEFAULT_GEN_OPTIONS = {
+	blacklist: '',
+	whitelist: '',
 	weight: DEFAULT_WEIGHT
 };
 
@@ -30,7 +31,8 @@ interface CharacterWeight {
 }
 
 interface genPWOpts {
-	forbiddenCharacters: string;
+	blacklist: string;
+	whitelist: string;
 	weight: CharacterWeight;
 }
 
@@ -63,8 +65,11 @@ function getRandomINT(max): number {
 	return Math.ceil(cryptoRand() * max);
 }
 
-export function generatePassword(length = 30, options = DEFAULT_GEN_OPTIONS): string {
-	const { forbiddenCharacters, weight } = options;
+export function generatePassword(length = 30, options: genPWOpts): string {
+	if (!options) {
+		options = DEFAULT_GEN_OPTIONS;
+	}
+	const { blacklist: forbiddenCharacters, weight } = options;
 
 	const characterString = generateCharacterString(forbiddenCharacters, weight);
 	const passwordArray = new Array(length).fill(null).map(() => {
