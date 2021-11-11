@@ -31,9 +31,9 @@ interface CharacterWeight {
 }
 
 interface genPWOpts {
-	blacklist: string;
-	whitelist: string;
-	weight: CharacterWeight;
+	blacklist?: string;
+	whitelist?: string;
+	weight?: CharacterWeight;
 }
 
 /**
@@ -65,7 +65,7 @@ function getRandomINT(max): number {
 	return Math.ceil(cryptoRand() * max);
 }
 
-export function generatePassword(length = 30, options: genPWOpts): string {
+export function generatePassword(length: number, options?: genPWOpts): string {
 	if (!options) {
 		options = DEFAULT_GEN_OPTIONS;
 	}
