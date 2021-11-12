@@ -6,6 +6,9 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 export default defineConfig({
 	plugins: [svelte()],
 	resolve: {
-		alias: [{ find: '$lib', replacement: resolve('src/lib') }]
+		alias: [
+			{ find: '$lib', replacement: resolve('src/lib') },
+			{ find: '$assets', replacement: resolve('src/assets') }
+		]
 	}
 });
