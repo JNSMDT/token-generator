@@ -77,5 +77,29 @@ export function generatePassword(length: number, options?: genPWOpts): string {
 		return characterString.charAt(randINT);
 	});
 
-	return passwordArray.join('');
+	const highlightedPassword = syntaxHighlight(passwordArray);
+
+	return highlightedPassword;
+}
+
+export function syntaxHighlight(passwordArray: string[]): string {
+	const highlightedPasswordArray = passwordArray.map(char => {
+		if (CHARACTORS_NUMBERS.includes(char)) {
+			return `<span class='number'>${char}</span>`;
+		}
+
+		if (CHARACTORS_SPECIAL.includes(char)) {
+			return `<span class='special'>${char}</span>`;
+		}
+		if (CHARACTORS_UPPERCASE.includes(char)) {
+			return `<span class='uppercase'>${char}</span>`;
+		}
+		if (CHARACTORS_LOWERCASE.includes(char)) {
+			return `<span class='lowercase'>${char}</span>`;
+		}
+
+		return char;
+	});
+
+	return highlightedPasswordArray.join('');
 }

@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { generatePassword } from '$lib/functions/password';
 	import { onMount } from 'svelte';
-	let pw: string;
+	let password: string;
 	let buttonText = 'Copy Password';
 	onMount(() => {
-		pw = generatePassword(30);
+		password = generatePassword(30);
 	});
 
 	function regeneratePassword() {
-		pw = generatePassword(30);
+		password = generatePassword(30);
 	}
 
 	async function copyToClipboard() {
-		await navigator.clipboard.writeText(pw);
+		await navigator.clipboard.writeText(password);
 		await changeButtonText();
 	}
 
@@ -29,7 +29,7 @@
 	<h2
 		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-blue-200 p-6 rounded-md"
 	>
-		{pw}
+		{@html password}
 	</h2>
 	<div class="flex gap-5 justify-center items-center">
 		<button
@@ -60,4 +60,20 @@
 	@tailwind base;
 	@tailwind components;
 	@tailwind utilities;
+
+	.number {
+		@apply text-blue-500;
+	}
+
+	.special {
+		@apply text-red-500;
+	}
+
+	.uppercase {
+		@apply text-black;
+	}
+
+	.lowercase {
+		@apply text-gray-700;
+	}
 </style>
