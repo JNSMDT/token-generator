@@ -77,12 +77,12 @@ export function generatePassword(length: number, options?: genPWOpts): string {
 		return characterString.charAt(randINT);
 	});
 
-	const highlightedPassword = syntaxHighlight(passwordArray);
-
-	return highlightedPassword;
+	const password = passwordArray.join('');
+	return password;
 }
 
-export function syntaxHighlight(passwordArray: string[]): string {
+export function syntaxHighlight(password: string): string {
+	const passwordArray = password.split('');
 	const highlightedPasswordArray = passwordArray.map(char => {
 		if (CHARACTORS_NUMBERS.includes(char)) {
 			return `<span class='number'>${char}</span>`;

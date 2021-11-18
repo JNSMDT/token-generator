@@ -1,14 +1,17 @@
 <script lang="ts">
-	import { generatePassword } from '$lib/functions/password';
+	import { generatePassword, syntaxHighlight } from '$lib/functions/password';
 	import { onMount } from 'svelte';
 	let password: string;
+	let syntaxHighlightedPassword: string;
 	let buttonText = 'Copy Password';
 	onMount(() => {
 		password = generatePassword(30);
+		syntaxHighlightedPassword = syntaxHighlight(password);
 	});
 
 	function regeneratePassword() {
 		password = generatePassword(30);
+		syntaxHighlightedPassword = syntaxHighlight(password);
 	}
 
 	async function copyToClipboard() {
@@ -29,7 +32,7 @@
 	<h2
 		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-blue-200 p-6 rounded-md"
 	>
-		{@html password}
+		{@html syntaxHighlightedPassword}
 	</h2>
 	<div class="flex gap-5 justify-center items-center">
 		<button
