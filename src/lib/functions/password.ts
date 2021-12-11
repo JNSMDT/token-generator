@@ -23,14 +23,14 @@ const DEFAULT_GEN_OPTIONS = {
  * INTERFACES
  */
 
-interface CharacterWeight {
+export interface CharacterWeight {
 	uppercase: number;
 	lowercase: number;
 	numbers: number;
 	special: number;
 }
 
-interface genPWOpts {
+export interface genPWOpts {
 	blacklist?: string;
 	whitelist?: string;
 	weight?: CharacterWeight;
@@ -39,20 +39,37 @@ interface genPWOpts {
 /**
  * FUNCTIONS
  */
-function generateCharacterString(forbidden = '', weight?: CharacterWeight): string {
+
+/**
+ *
+ * @param blacklist A String that contains characters that are not allowed
+ * @param whitelist A String that contaings characters that are only allowed (currently only for special Characters)
+ * @param weight A object that determines how frequent a specific type of characters appear
+ * @returns
+ */
+function generateCharacterString(blacklist = '', whitelist = '', weight?: CharacterWeight): string {
 	if (!weight) {
 		weight = DEFAULT_WEIGHT;
 	}
+
+	if (whitelist !== '') {
+		const graylist = Array.from(CHARACTORS_SPECIAL).filter(char => !whitelist.includes(char));
+		blacklist = graylist.join('');
+	}
+
+	const specialString = Array.from(CHARACTORS_SPECIAL).filter(char => !blacklist.includes(char));
+
 	const uppercaseString = CHARACTORS_UPPERCASE.repeat(weight.uppercase);
 	const lowercaseString = CHARACTORS_LOWERCASE.repeat(weight.lowercase);
 	const numbersString = CHARACTORS_NUMBERS.repeat(weight.numbers);
-	const specialString = CHARACTORS_SPECIAL.repeat(weight.special);
 
-	const characterString = uppercaseString + lowercaseString + numbersString + specialString;
+	const specialStringRepeat = specialString.length < 10 ? 10 : weight.special;
 
-	const purgedCharacters = Array.from(characterString).filter(c => !forbidden.includes(c));
-	const purgedCharacterString = purgedCharacters.join('');
-	return purgedCharacterString;
+	const verySpecialString = specialString.join('').repeat(specialStringRepeat);
+
+	const characterString = uppercaseString + lowercaseString + numbersString + verySpecialString;
+
+	return characterString;
 }
 
 function cryptoRand(): number {
@@ -61,7 +78,7 @@ function cryptoRand(): number {
 	return randomBuffer[0] / (0xffffffff + 1);
 }
 
-function getRandomINT(max): number {
+function getRandomINT(max: number): number {
 	return Math.ceil(cryptoRand() * max);
 }
 
@@ -69,9 +86,9 @@ export function generatePassword(length: number, options?: genPWOpts): string {
 	if (!options) {
 		options = DEFAULT_GEN_OPTIONS;
 	}
-	const { blacklist: forbiddenCharacters, weight } = options;
+	const { blacklist, whitelist, weight } = options;
 
-	const characterString = generateCharacterString(forbiddenCharacters, weight);
+	const characterString = generateCharacterString(blacklist, whitelist, weight);
 	const passwordArray = new Array(length).fill(null).map(() => {
 		const randINT = getRandomINT(characterString.length);
 		return characterString.charAt(randINT);
