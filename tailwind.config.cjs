@@ -17,7 +17,7 @@ module.exports = {
 		extend: {},
 		fontFamily: {
 			sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
-			mono: ['Fira Code', ...defaultTheme.fontFamily.mono]
+			mono: [...defaultTheme.fontFamily.mono]
 		}
 	},
 	variants: {
