@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { generatePassword, syntaxHighlight } from '$lib/functions/password';
 	import { onMount } from 'svelte';
+
 	let password: string;
 	let syntaxHighlightedPassword: string;
 	let buttonText = 'Copy Password';
+
 	onMount(() => {
 		password = generatePassword(30);
 		syntaxHighlightedPassword = syntaxHighlight(password);
@@ -27,20 +29,20 @@
 	}
 </script>
 
-<main class="bg-blue-300 px-4 pt-10 pb-80 grid grid-rows-3 justify-center items-center h-screen">
+<main class="bg-sky-300 px-4 pt-10 pb-80 grid grid-rows-3 justify-center items-center h-screen">
 	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">Cryptosubtle PWGen 🔐</h1>
 	<h2
-		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-blue-200 p-6 rounded-md"
+		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-slate-200 p-6 rounded-md"
 	>
 		{@html syntaxHighlightedPassword}
 	</h2>
 	<div class="flex gap-5 justify-center items-center">
 		<button
 			on:click={copyToClipboard}
-			class="rounded-md w-60 bg-blue-400 py-3 px-6 font-bold hover:border-4 hover:border-blue-500"
+			class="rounded-md w-60 bg-sky-400 py-3 px-6 font-bold hover:border-4 hover:border-sky-500"
 			>{buttonText}</button
 		>
-		<button on:click={regeneratePassword} class="bg-gray-400 p-2">
+		<button on:click={regeneratePassword} class="bg-slate-200 p-3 rounded-md hover:bg-slate-300">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-6 w-6"
@@ -62,6 +64,15 @@
 <style global>
 	@tailwind base;
 	@tailwind components;
+
+	@layer base {
+		@font-face {
+			font-family: Iosevka;
+			font-weight: 700;
+			src: url(../assets/fonts/iosevka-fixed-bold.woff2) format('woff2');
+		}
+	}
+
 	@tailwind utilities;
 
 	.number {
