@@ -14,8 +14,8 @@ const DEFAULT_WEIGHT = {
 };
 
 const DEFAULT_GEN_OPTIONS = {
-	blacklist: '',
-	whitelist: '',
+	blackList: '',
+	whiteList: '',
 	weight: DEFAULT_WEIGHT
 };
 
@@ -31,8 +31,8 @@ export interface CharacterWeight {
 }
 
 export interface genPWOpts {
-	blacklist?: string;
-	whitelist?: string;
+	blackList?: string;
+	whiteList?: string;
 	weight?: CharacterWeight;
 }
 
@@ -42,22 +42,25 @@ export interface genPWOpts {
 
 /**
  *
- * @param blacklist A String that contains characters that are not allowed
- * @param whitelist A String that contaings characters that are only allowed (currently only for special Characters)
+ * @param blackList A String that contains characters that are not allowed
+ * @param whiteList A String that contaings characters that are only allowed (currently only for special Characters)
  * @param weight A object that determines how frequent a specific type of characters appear
  * @returns
  */
-function generateCharacterString(blacklist = '', whitelist = '', weight?: CharacterWeight): string {
+function generateCharacterString(blackList = '', whiteList = '', weight?: CharacterWeight): string {
 	if (!weight) {
 		weight = DEFAULT_WEIGHT;
 	}
-
-	if (whitelist !== '') {
-		const graylist = Array.from(CHARACTORS_SPECIAL).filter(char => !whitelist.includes(char));
-		blacklist = graylist.join('');
+	console.log({
+		blackList,
+		whiteList
+	});
+	if (whiteList !== '') {
+		const graylist = Array.from(CHARACTORS_SPECIAL).filter(char => !whiteList.includes(char));
+		blackList = graylist.join('');
 	}
 
-	const specialString = Array.from(CHARACTORS_SPECIAL).filter(char => !blacklist.includes(char));
+	const specialString = Array.from(CHARACTORS_SPECIAL).filter(char => !blackList.includes(char));
 
 	const uppercaseString = CHARACTORS_UPPERCASE.repeat(weight.uppercase);
 	const lowercaseString = CHARACTORS_LOWERCASE.repeat(weight.lowercase);
@@ -86,14 +89,15 @@ export function generatePassword(length: number, options?: genPWOpts): string {
 	if (!options) {
 		options = DEFAULT_GEN_OPTIONS;
 	}
-	const { blacklist, whitelist, weight } = options;
+	const { blackList, whiteList, weight } = options;
 
-	const characterString = generateCharacterString(blacklist, whitelist, weight);
-	const passwordArray = new Array(length).fill(null).map(() => {
+	const characterString = generateCharacterString(blackList, whiteList, weight);
+
+	const fixLengthEmptyArray = new Array(length).fill(null);
+	const passwordArray = fixLengthEmptyArray.map(() => {
 		const randINT = getRandomINT(characterString.length);
 		return characterString.charAt(randINT);
 	});
-
 	const password = passwordArray.join('');
 	return password;
 }
