@@ -2,7 +2,8 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	mode: 'jit',
-	darkMode: 'media', // or 'media' or 'class'
+	purge: ['./public/index.html', './src/**/*.svelte'],
+	darkMode: false, // or 'media' or 'class'
 	theme: {
 		extend: {},
 		fontFamily: {
