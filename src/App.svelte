@@ -43,7 +43,7 @@
 </script>
 
 <main class="bg-sky-300 px-4 pt-10 pb-80 grid grid-rows-3 justify-center items-center h-screen">
-	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">Cryptosubtle PWGen 🔐</h1>
+	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">WebCrypto PWGen 🔐</h1>
 	<h2
 		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-slate-200 p-6 rounded-md"
 	>
