@@ -2,7 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	mode: 'jit',
-	purge: ['./public/index.html', './src/**/*.svelte'],
+	content: ['./public/index.html', './src/**/*.svelte'],
 	theme: {
 		extend: {},
 		fontFamily: {
