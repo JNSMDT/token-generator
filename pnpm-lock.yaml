@@ -21,6 +21,7 @@ specifiers:
   postcss-load-config: ^3.1.1
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.1
+  rfc4648: ^1.5.1
   rollup: ^2.63.0
   svelte: ^3.44.3
   svelte-check: ^2.2.11
@@ -29,6 +30,9 @@ specifiers:
   tslib: ^2.3.1
   typescript: ^4.5.4
   vite: ^2.7.10
+
+dependencies:
+  rfc4648: 1.5.1
 
 devDependencies:
   '@rollup/plugin-commonjs': 21.0.1_rollup@2.63.0
@@ -2184,6 +2188,10 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
     dev: true
+
+  /rfc4648/1.5.1:
+    resolution: {integrity: sha512-60e/YWs2/D3MV1ErdjhJHcmlgnyLUiG4X/14dgsfm9/zmCWLN16xI6YqJYSCd/OANM7bUNzJqPY5B8/02S9Ibw==}
+    dev: false
 
   /rimraf/2.7.1:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}

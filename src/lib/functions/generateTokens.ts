@@ -1,3 +1,4 @@
+import { base64 } from 'rfc4648';
 /**
  * CONSTANTS
  */
@@ -123,4 +124,13 @@ export function syntaxHighlight(password: string): string {
 	});
 
 	return highlightedPasswordArray.join('');
+}
+
+export function convertToBase64(pw: string): string {
+	console.log(pw);
+	const passwordUInt8Array = new TextEncoder().encode(pw);
+	console.log(passwordUInt8Array);
+	const b64String = base64.stringify(passwordUInt8Array, { pad: false });
+	console.log(b64String);
+	return b64String;
 }
