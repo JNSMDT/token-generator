@@ -10,6 +10,7 @@
 	} from '$lib/functions/generateTokens';
 
 	let password: string;
+	let highlightedPassword: string;
 	let buttonText = 'Copy Password';
 	let modalShow = false;
 	let pwLength = 30;
@@ -27,7 +28,7 @@
 			password = convertToBase64(password);
 		}
 
-		password = syntaxHighlight(password);
+		highlightedPassword = syntaxHighlight(password);
 	}
 
 	onMount(() => {
@@ -58,7 +59,7 @@
 	<h2
 		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-slate-200 p-6 rounded-md"
 	>
-		{@html password}
+		{@html highlightedPassword}
 	</h2>
 
 	<div class="flex gap-5 justify-center items-center">
