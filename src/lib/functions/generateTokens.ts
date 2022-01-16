@@ -41,6 +41,15 @@ export interface genPWOpts {
  * FUNCTIONS
  */
 
+export function saveToSessionStorage(token: string): void {
+	const timestamp = new Date().getTime();
+	const key = `token-${timestamp}`;
+	sessionStorage.setItem(key, token);
+	setTimeout(() => {
+		sessionStorage.removeItem(key);
+	}, 10000 * 60 * 60);
+}
+
 /**
  *
  * @param blackList A String that contains characters that are not allowed
@@ -52,10 +61,7 @@ function generateCharacterString(blackList = '', whiteList = '', weight?: Charac
 	if (!weight) {
 		weight = DEFAULT_WEIGHT;
 	}
-	console.log({
-		blackList,
-		whiteList
-	});
+
 	if (whiteList !== '') {
 		const graylist = Array.from(CHARACTORS_SPECIAL).filter(char => !whiteList.includes(char));
 		blackList = graylist.join('');
@@ -127,10 +133,7 @@ export function syntaxHighlight(password: string): string {
 }
 
 export function convertToBase64(pw: string): string {
-	console.log(pw);
 	const passwordUInt8Array = new TextEncoder().encode(pw);
-	console.log(passwordUInt8Array);
 	const b64String = base64.stringify(passwordUInt8Array, { pad: false });
-	console.log(b64String);
 	return b64String;
 }

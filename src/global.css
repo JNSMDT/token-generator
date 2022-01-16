@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+
+@layer base {
+	@font-face {
+		font-family: Iosevka;
+		font-weight: 700;
+		src: url(../assets/fonts/iosevka-fixed-bold.woff2) format('woff2');
+	}
+}
+
+@tailwind utilities;
+
+.number {
+	@apply text-blue-500;
+}
+
+.special {
+	@apply text-red-500;
+}
+
+.uppercase {
+	@apply text-black;
+}
+
+.lowercase {
+	@apply text-gray-700;
+}
+
+.radio-label {
+	@apply bg-white h-full min-w-[200px] flex items-center justify-evenly rounded-md cursor-pointer p-2 border-2 border-slate-300;
+}
+
+.radio-dot {
+	@apply relative rounded-full bg-slate-300 w-5 h-5;
+}
+.radio-dot::before {
+	@apply absolute content-[''] top-1 left-1 w-3 h-3 bg-sky-500 rounded-full scale-150 transition-all ease-in opacity-0;
+}
+input[type='radio'] {
+	display: none;
+}
+#passwordRadio:checked ~ .radio-label-pw,
+#b64Radio:checked ~ .radio-label-tkn {
+	@apply border-sky-500 bg-sky-500;
+}
+#passwordRadio:checked ~ .radio-label-pw .radio-dot,
+#b64Radio:checked ~ .radio-label-tkn .radio-dot {
+	@apply bg-slate-100;
+}
+#passwordRadio:checked ~ .radio-label-pw .radio-dot::before,
+#b64Radio:checked ~ .radio-label-tkn .radio-dot::before {
+	@apply opacity-100 scale-100;
+}
+.radio-text {
+	@apply text-slate-800 font-bold;
+}

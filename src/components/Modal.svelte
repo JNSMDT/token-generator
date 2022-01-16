@@ -9,11 +9,9 @@
 	export let pwLength;
 	export let blackList;
 	export let whiteList;
-	export let tokenType;
 	let inputPwLength = pwLength;
 	let inputBlackList = blackList;
 	let inputWhiteList = whiteList;
-	let inputTokenType = tokenType;
 	function handleRegeneratePW() {
 		pwLength = inputPwLength;
 		blackList = inputBlackList;
@@ -35,34 +33,12 @@
 		transition:fade={{ duration: 150 }}
 	>
 		<div
-			class="rounded-xl relative bg-white w-1/4 p-4 mt-4 mb-4 shadow-md m-auto flex flex-col justify-center"
+			class="rounded-xl relative bg-white w-[400px] p-4 mt-4 mb-4 shadow-md m-auto flex flex-col justify-center"
 		>
 			<h1 class="text-2xl font-bold mb-4">Settings</h1>
 
 			<div class="flex flex-col">
 				<div class="mb-8">
-					<div class="mb-4 pl-2">
-						<input
-							id="passwordRadio"
-							type="radio"
-							bind:group={tokenType}
-							name="tokenTypes"
-							value={'password'}
-						/>
-						<label class="px-2 mb-1 text-base font-medium text-gray-700" for="passwordRadio">
-							Password
-						</label>
-						<input
-							id="b64Radio"
-							type="radio"
-							bind:group={tokenType}
-							name="tokenTypes"
-							value={'b64token'}
-						/>
-						<label class="px-2 mb-1 text-base font-medium text-gray-700" for="b64Radio">
-							Base64 Token
-						</label>
-					</div>
 					<label for="pwLength" class="px-2 mb-1 block text-sm font-medium text-gray-700"
 						>Length</label
 					>

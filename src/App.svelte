@@ -6,7 +6,8 @@
 	import {
 		generatePassword,
 		syntaxHighlight,
-		convertToBase64
+		convertToBase64,
+		saveToSessionStorage
 	} from '$lib/functions/generateTokens';
 
 	let password: string;
@@ -23,11 +24,9 @@
 			blackList,
 			whiteList
 		});
-		console.log(tokenType);
 		if (tokenType === 'b64token') {
 			password = convertToBase64(password);
 		}
-
 		highlightedPassword = syntaxHighlight(password);
 	}
 
@@ -41,6 +40,7 @@
 
 	async function copyToClipboard() {
 		await navigator.clipboard.writeText(password);
+		saveToSessionStorage(password);
 		await changeButtonText();
 	}
 
@@ -56,18 +56,47 @@
 	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">
 		WebCrypto Token Generator 🔐
 	</h1>
-	<h2
-		class="sm:text-3xl lg:text-4xl font-mono text-md font-bold text-center bg-slate-200 p-6 rounded-md"
-	>
-		{@html highlightedPassword}
-	</h2>
+	<div class="flex flex-col gap-10">
+		<div class="flex justify-center mx-auto gap-[10%]">
+			<input
+				id="passwordRadio"
+				type="radio"
+				bind:group={tokenType}
+				name="tokenTypes"
+				value={'password'}
+				on:change={regeneratePassword}
+			/>
+			<input
+				id="b64Radio"
+				type="radio"
+				bind:group={tokenType}
+				name="tokenTypes"
+				value={'b64token'}
+				on:change={regeneratePassword}
+			/>
+			<label class="radio-label radio-label-pw" for="passwordRadio">
+				<span class="radio-dot" />
+				<span class="radio-text"> Password </span>
+			</label>
+			<label class="radio-label radio-label-tkn" for="b64Radio">
+				<span class="radio-dot" />
+				<span class="radio-text"> Base64 Token </span>
+			</label>
+		</div>
+		<h2
+			class="sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-6 rounded-md"
+		>
+			{@html highlightedPassword}
+		</h2>
+	</div>
 
 	<div class="flex gap-5 justify-center items-center">
 		<button
 			on:click={copyToClipboard}
-			class="rounded-md w-60 bg-sky-400 py-3 px-6 font-bold hover:text-white ">{buttonText}</button
+			class="rounded-md w-60 text-slate-800 bg-sky-400 py-3 px-6 font-bold hover:text-white "
+			>{buttonText}</button
 		>
-		<button on:click={regeneratePassword} class="bg-slate-200 p-3 rounded-md hover:bg-slate-300">
+		<button on:click={regeneratePassword} class="bg-slate-100 p-3 rounded-md hover:bg-slate-300">
 			<i>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +118,7 @@
 			on:click={() => {
 				modalShow = true;
 			}}
-			class="bg-slate-200 p-3 rounded-md hover:bg-slate-300"
+			class="bg-slate-100 p-3 rounded-md hover:bg-slate-300"
 			><i>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -128,40 +157,8 @@
 	<Modal
 		on:regeneratePassword={regeneratePassword}
 		bind:show={modalShow}
-		bind:tokenType
 		bind:pwLength
 		bind:blackList
 		bind:whiteList
 	/>
 </main>
-
-<style global>
-	@tailwind base;
-	@tailwind components;
-
-	@layer base {
-		@font-face {
-			font-family: Iosevka;
-			font-weight: 700;
-			src: url(../assets/fonts/iosevka-fixed-bold.woff2) format('woff2');
-		}
-	}
-
-	@tailwind utilities;
-
-	.number {
-		@apply text-blue-500;
-	}
-
-	.special {
-		@apply text-red-500;
-	}
-
-	.uppercase {
-		@apply text-black;
-	}
-
-	.lowercase {
-		@apply text-gray-700;
-	}
-</style>
