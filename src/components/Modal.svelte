@@ -33,7 +33,7 @@
 		transition:fade={{ duration: 150 }}
 	>
 		<div
-			class="rounded-xl relative bg-white w-[400px] p-4 mt-4 mb-4 shadow-md m-auto flex flex-col justify-center"
+			class="rounded-xl relative bg-white w-[80%] sm:w-[400px] p-2 sm:p-4 sm:mt-4 sm:mb-4 shadow-md m-auto flex flex-col justify-center"
 		>
 			<h1 class="text-2xl font-bold mb-4">Settings</h1>
 
