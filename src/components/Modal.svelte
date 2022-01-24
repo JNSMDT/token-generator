@@ -12,7 +12,8 @@
 	let inputPwLength = pwLength;
 	let inputBlackList = blackList;
 	let inputWhiteList = whiteList;
-	function handleRegeneratePW() {
+
+	function handleSaveSettings() {
 		pwLength = inputPwLength;
 		blackList = inputBlackList;
 		whiteList = inputWhiteList;
@@ -21,10 +22,20 @@
 		dispatch('regeneratePassword');
 	}
 
-	function handleCancel() {
+	function handleKeyPress(event) {
+		if (event.keyCode !== 27) {
+			return;
+		}
+
+		closeModal();
+	}
+
+	function closeModal() {
 		show = false;
 	}
 </script>
+
+<svelte:window on:keyup={handleKeyPress} />
 
 {#if show}
 	<div
@@ -75,13 +86,13 @@
 						bind:value={inputWhiteList}
 					/>
 				</div>
-				<button class="absolute top-4 right-4" on:click={handleCancel}
+				<button class="absolute top-4 right-4" on:click={closeModal}
 					><i><CancelIcon class="w-6" /></i></button
 				>
 			</div>
 			<button
 				class="mt-10 mb-4 p-4  mx-auto rounded-md w-60 bg-sky-400 py-3 px-6 font-bold hover:text-white"
-				on:click={handleRegeneratePW}>Save</button
+				on:click={handleSaveSettings}>Save</button
 			>
 		</div>
 	</div>
