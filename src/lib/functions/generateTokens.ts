@@ -2,10 +2,10 @@ import { base64 } from 'rfc4648';
 /**
  * CONSTANTS
  */
-const CHARACTORS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; //26
-const CHARACTORS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; //26
-const CHARACTORS_NUMBERS = '0123456789'; // 10
-const CHARACTORS_SPECIAL = '*+,-_.()/@!?#$%&"\':;[]^`{}~<=>'; // 30
+const CHARACTERS_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; //26
+const CHARACTERS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; //26
+const CHARACTERS_NUMBERS = '0123456789'; // 10
+const CHARACTERS_SPECIAL = '*+,-_.()/@!?#$%&"\':;[]^`{}~<=>'; // 30
 
 const DEFAULT_WEIGHT = {
 	uppercase: 2,
@@ -63,15 +63,15 @@ function generateCharacterString(blackList = '', whiteList = '', weight?: Charac
 	}
 
 	if (whiteList !== '') {
-		const graylist = Array.from(CHARACTORS_SPECIAL).filter(char => !whiteList.includes(char));
+		const graylist = Array.from(CHARACTERS_SPECIAL).filter(char => !whiteList.includes(char));
 		blackList = graylist.join('');
 	}
 
-	const specialString = Array.from(CHARACTORS_SPECIAL).filter(char => !blackList.includes(char));
+	const specialString = Array.from(CHARACTERS_SPECIAL).filter(char => !blackList.includes(char));
 
-	const uppercaseString = CHARACTORS_UPPERCASE.repeat(weight.uppercase);
-	const lowercaseString = CHARACTORS_LOWERCASE.repeat(weight.lowercase);
-	const numbersString = CHARACTORS_NUMBERS.repeat(weight.numbers);
+	const uppercaseString = CHARACTERS_UPPERCASE.repeat(weight.uppercase);
+	const lowercaseString = CHARACTERS_LOWERCASE.repeat(weight.lowercase);
+	const numbersString = CHARACTERS_NUMBERS.repeat(weight.numbers);
 
 	const specialStringRepeat = specialString.length < 10 ? 10 : weight.special;
 
@@ -112,17 +112,17 @@ export function generatePassword(length: number, options?: genPWOpts): string {
 export function syntaxHighlight(password: string): string {
 	const passwordArray = password.split('');
 	const highlightedPasswordArray = passwordArray.map(char => {
-		if (CHARACTORS_NUMBERS.includes(char)) {
+		if (CHARACTERS_NUMBERS.includes(char)) {
 			return `<span class='number'>${char}</span>`;
 		}
 
-		if (CHARACTORS_SPECIAL.includes(char)) {
+		if (CHARACTERS_SPECIAL.includes(char)) {
 			return `<span class='special'>${char}</span>`;
 		}
-		if (CHARACTORS_UPPERCASE.includes(char)) {
+		if (CHARACTERS_UPPERCASE.includes(char)) {
 			return `<span class='uppercase'>${char}</span>`;
 		}
-		if (CHARACTORS_LOWERCASE.includes(char)) {
+		if (CHARACTERS_LOWERCASE.includes(char)) {
 			return `<span class='lowercase'>${char}</span>`;
 		}
 
