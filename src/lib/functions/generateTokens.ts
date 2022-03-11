@@ -14,28 +14,22 @@ const DEFAULT_WEIGHT = {
 	special: 1
 };
 
-const DEFAULT_GEN_OPTIONS = {
-	blackList: '',
-	whiteList: '',
-	weight: DEFAULT_WEIGHT
-};
-
 /**
  * INTERFACES
  */
 
-export interface CharacterWeight {
+export type CharacterWeight = {
 	uppercase: number;
 	lowercase: number;
 	numbers: number;
 	special: number;
-}
+};
 
-export interface genPWOpts {
-	blackList?: string;
-	whiteList?: string;
+export type GeneratePWOpts = {
+	blacklistedChars?: string;
+	whitelistedChars?: string;
 	weight?: CharacterWeight;
-}
+};
 
 /**
  * FUNCTIONS
@@ -52,34 +46,48 @@ export function saveToSessionStorage(token: string): void {
 
 /**
  *
- * @param blackList A String that contains characters that are not allowed
- * @param whiteList A String that contaings characters that are only allowed (currently only for special Characters)
+ * @param blacklistedChars A String that contains characters that are not allowed
+ * @param whitelistedChars A String that contaings characters that are only allowed (currently only for special Characters)
  * @param weight A object that determines how frequent a specific type of characters appear
  * @returns
  */
-function generateCharacterString(blackList = '', whiteList = '', weight?: CharacterWeight): string {
-	if (!weight) {
-		weight = DEFAULT_WEIGHT;
-	}
+function generateCharacterString(
+	blacklistedChars = '',
+	whitelistedChars = '',
+	weight = DEFAULT_WEIGHT
+): string {
+	/**
+	 * Currently the implementation of the whitelist is by converting it to a blacklist and then
+	 * overwriting the potentional given blacklist. This means you can't have a blacklist and a
+	 * whitelist at the same time, what in my opinion doesn't make sense anyway.
+	 */
 
-	if (whiteList !== '') {
-		const graylist = Array.from(CHARACTERS_SPECIAL).filter(char => !whiteList.includes(char));
-		blackList = graylist.join('');
-	}
+	console.log({
+		blacklistedChars,
+		whitelistedChars
+	});
+	const blacklistCharsArr = Array.from(CHARACTERS_SPECIAL).filter(char => {
+		if (whitelistedChars !== '') return whitelistedChars.includes(char);
+		return !blacklistedChars.includes(char);
+	});
+	const customSpecialChars = blacklistCharsArr.join('');
 
-	const specialString = Array.from(CHARACTERS_SPECIAL).filter(char => !blackList.includes(char));
+	const uppercaseWeightedString = CHARACTERS_UPPERCASE.repeat(weight.uppercase);
+	const lowercaseWeightedString = CHARACTERS_LOWERCASE.repeat(weight.lowercase);
+	const numbersWeightedString = CHARACTERS_NUMBERS.repeat(weight.numbers);
 
-	const uppercaseString = CHARACTERS_UPPERCASE.repeat(weight.uppercase);
-	const lowercaseString = CHARACTERS_LOWERCASE.repeat(weight.lowercase);
-	const numbersString = CHARACTERS_NUMBERS.repeat(weight.numbers);
+	const specialCharsRepeat =
+		weight.special * (CHARACTERS_SPECIAL.length / customSpecialChars.length);
 
-	const specialStringRepeat = specialString.length < 10 ? 10 : weight.special;
+	const specialWeightedString = customSpecialChars.repeat(specialCharsRepeat);
 
-	const verySpecialString = specialString.join('').repeat(specialStringRepeat);
+	const weightedCharsString =
+		uppercaseWeightedString +
+		lowercaseWeightedString +
+		numbersWeightedString +
+		specialWeightedString;
 
-	const characterString = uppercaseString + lowercaseString + numbersString + verySpecialString;
-
-	return characterString;
+	return weightedCharsString;
 }
 
 function cryptoRand(): number {
@@ -92,13 +100,10 @@ function getRandomINT(max: number): number {
 	return Math.ceil(cryptoRand() * max);
 }
 
-export function generatePassword(length: number, options?: genPWOpts): string {
-	if (!options) {
-		options = DEFAULT_GEN_OPTIONS;
-	}
-	const { blackList, whiteList, weight } = options;
+export function generatePassword(length: number, options?: GeneratePWOpts): string {
+	const { blacklistedChars, whitelistedChars, weight } = options;
 
-	const characterString = generateCharacterString(blackList, whiteList, weight);
+	const characterString = generateCharacterString(blacklistedChars, whitelistedChars, weight);
 
 	const fixLengthEmptyArray = new Array(length).fill(null);
 	const passwordArray = fixLengthEmptyArray.map(() => {

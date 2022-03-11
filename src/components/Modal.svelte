@@ -7,16 +7,16 @@
 
 	export let show = false;
 	export let pwLength;
-	export let blackList;
-	export let whiteList;
+	export let blacklistedChars;
+	export let whitelistedChars;
 	let inputPwLength = pwLength;
-	let inputBlackList = blackList;
-	let inputWhiteList = whiteList;
+	let inputBlackList = blacklistedChars;
+	let inputWhiteList = whitelistedChars;
 
 	function handleSaveSettings() {
 		pwLength = inputPwLength;
-		blackList = inputBlackList;
-		whiteList = inputWhiteList;
+		blacklistedChars = inputBlackList;
+		whitelistedChars = inputWhiteList;
 
 		show = false;
 		dispatch('regeneratePassword');

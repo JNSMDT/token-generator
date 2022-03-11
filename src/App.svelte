@@ -15,14 +15,14 @@
 	let buttonText = 'Copy Password';
 	let modalShow = false;
 	let pwLength = 30;
-	let blackList = '';
-	let whiteList = '';
+	let blacklistedChars = '';
+	let whitelistedChars = '';
 	let tokenType = 'password';
 
 	function getToken() {
 		password = generatePassword(pwLength, {
-			blackList,
-			whiteList
+			blacklistedChars,
+			whitelistedChars
 		});
 		if (tokenType === 'b64token') {
 			password = convertToBase64(password);
@@ -158,7 +158,7 @@
 		on:regeneratePassword={regeneratePassword}
 		bind:show={modalShow}
 		bind:pwLength
-		bind:blackList
-		bind:whiteList
+		bind:blacklistedChars
+		bind:whitelistedChars
 	/>
 </main>
