@@ -7,16 +7,16 @@
 
 	export let show = false;
 	export let pwLength;
-	export let blacklistedChars;
-	export let whitelistedChars;
+	export let customSpecialChars;
+	export let customSpecialCharsType;
 	let inputPwLength = pwLength;
-	let inputBlackList = blacklistedChars;
-	let inputWhiteList = whitelistedChars;
+	let inputCustomSpecialChars = customSpecialChars;
+	let inputCustomSpecialCharsType = customSpecialCharsType;
 
 	function handleSaveSettings() {
 		pwLength = inputPwLength;
-		blacklistedChars = inputBlackList;
-		whitelistedChars = inputWhiteList;
+		customSpecialChars = inputCustomSpecialChars;
+		customSpecialCharsType = inputCustomSpecialCharsType;
 
 		show = false;
 		dispatch('regeneratePassword');
@@ -48,8 +48,8 @@
 		>
 			<h1 class="text-2xl font-bold mb-4">Settings</h1>
 
-			<div class="flex flex-col">
-				<div class="mb-8">
+			<div class="flex flex-col text-center">
+				<div class="mb-16">
 					<label for="pwLength" class="px-2 mb-1 block text-sm font-medium text-gray-700"
 						>Length</label
 					>
@@ -61,31 +61,39 @@
 						bind:value={inputPwLength}
 					/>
 				</div>
-
-				<div class="mb-8">
-					<label for="blackList" class="px-2 mb-1 block text-sm font-medium text-gray-700"
-						>Blacklist (only special Character)</label
-					>
-					<input
-						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
-						name="blackList"
-						type="text"
-						id="blackList"
-						bind:value={inputBlackList}
-					/>
-				</div>
 				<div>
-					<label for="whiteList" class="px-2 mb-1 block text-sm font-medium text-gray-700"
-						>Whitelist (only special Character)</label
+					<input
+						id="whitelist"
+						type="radio"
+						bind:group={inputCustomSpecialCharsType}
+						name="customSpecialCharType"
+						value={'whitelist'}
+					/>
+					<label class="pr-4 checked:text-white" for="whitelist"> Whitelist </label>
+					<input
+						id="blacklist"
+						type="radio"
+						bind:group={inputCustomSpecialCharsType}
+						name="customSpecialCharType"
+						value={'blacklist'}
+					/>
+					<label class="" for="blacklist"> Blacklist </label>
+				</div>
+				<div class="mb-8">
+					<label
+						for="customCharactersInput"
+						class="px-2 mb-1 block text-sm font-medium text-gray-700"
+						>Custom Characters (only special Character)</label
 					>
 					<input
 						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
-						name="whitelist"
+						name="customCharactersInput"
 						type="text"
-						id="whitelist"
-						bind:value={inputWhiteList}
+						id="customCharactersInput"
+						bind:value={inputCustomSpecialChars}
 					/>
 				</div>
+
 				<button class="absolute top-4 right-4" on:click={closeModal}
 					><i><CancelIcon class="w-6" /></i></button
 				>

@@ -10,24 +10,26 @@
 		saveToSessionStorage
 	} from '$lib/functions/generateTokens';
 
+	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
+
 	let password: string;
-	let highlightedPassword: string;
+	let highlightedToken: string;
 	let buttonText = 'Copy Password';
 	let modalShow = false;
 	let pwLength = 30;
-	let blacklistedChars = '';
-	let whitelistedChars = '';
+	let customSpecialChars: CustomSpecialChars = '';
+	let customSpecialCharsType: CustomSpecialCharsType = 'whitelist';
 	let tokenType = 'password';
 
 	function getToken() {
 		password = generatePassword(pwLength, {
-			blacklistedChars,
-			whitelistedChars
+			customSpecialChars,
+			customSpecialCharsType
 		});
 		if (tokenType === 'b64token') {
 			password = convertToBase64(password);
 		}
-		highlightedPassword = syntaxHighlight(password);
+		highlightedToken = syntaxHighlight(password);
 	}
 
 	onMount(() => {
@@ -86,7 +88,7 @@
 		<h2
 			class="text-base sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
 		>
-			{@html highlightedPassword}
+			{@html highlightedToken}
 		</h2>
 	</div>
 
@@ -158,7 +160,13 @@
 		on:regeneratePassword={regeneratePassword}
 		bind:show={modalShow}
 		bind:pwLength
-		bind:blacklistedChars
-		bind:whitelistedChars
+		bind:customSpecialChars
+		bind:customSpecialCharsType
 	/>
 </main>
+
+<style>
+	input[type='radio'] {
+		display: none;
+	}
+</style>
