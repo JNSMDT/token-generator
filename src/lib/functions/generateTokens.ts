@@ -24,10 +24,12 @@ export type CharacterWeight = {
 	numbers: number;
 	special: number;
 };
+export type CustomSpecialChars = string;
+export type CustomSpecialCharsType = 'blacklist' | 'whitelist';
 
 export type GeneratePWOpts = {
-	blacklistedChars?: string;
-	whitelistedChars?: string;
+	customSpecialChars?: CustomSpecialChars;
+	customSpecialCharsType?: CustomSpecialCharsType;
 	weight?: CharacterWeight;
 };
 
@@ -45,41 +47,41 @@ export function saveToSessionStorage(token: string): void {
 }
 
 /**
- *
- * @param blacklistedChars A String that contains characters that are not allowed
- * @param whitelistedChars A String that contaings characters that are only allowed (currently only for special Characters)
+ * @param customSpecialChars A string that contains custom characters that should be either whitelisted or blacklisted
+ * @param customSpecialCharsType  A string that determines if the custom characters either should be a blacklist or whitelist. Defaults to whitelist.
  * @param weight A object that determines how frequent a specific type of characters appear
  * @returns
  */
 function generateCharacterString(
-	blacklistedChars = '',
-	whitelistedChars = '',
-	weight = DEFAULT_WEIGHT
+	customSpecialChars: CustomSpecialChars = '',
+	customSpecialCharsType: CustomSpecialCharsType = 'whitelist',
+	weight: CharacterWeight = DEFAULT_WEIGHT
 ): string {
-	/**
-	 * Currently the implementation of the whitelist is by converting it to a blacklist and then
-	 * overwriting the potentional given blacklist. This means you can't have a blacklist and a
-	 * whitelist at the same time, what in my opinion doesn't make sense anyway.
-	 */
+	let allowedSpecialChars = CHARACTERS_SPECIAL;
+	// skip if customSpecialChars is empty
+	if (customSpecialChars !== '') {
+		/**
+		 * Currently the implementation of the whitelist is by converting it to a blacklist and then
+		 * overwriting the potentional given blacklist. This means you can't have a blacklist and a
+		 * whitelist at the same time, what in my opinion doesn't make sense anyway.
+		 */
 
-	console.log({
-		blacklistedChars,
-		whitelistedChars
-	});
-	const blacklistCharsArr = Array.from(CHARACTERS_SPECIAL).filter(char => {
-		if (whitelistedChars !== '') return whitelistedChars.includes(char);
-		return !blacklistedChars.includes(char);
-	});
-	const customSpecialChars = blacklistCharsArr.join('');
+		const allowedSpecialCharsArr = Array.from(CHARACTERS_SPECIAL).filter(char => {
+			if (customSpecialCharsType === 'whitelist') return customSpecialChars.includes(char);
+			return !customSpecialChars.includes(char);
+		});
+		allowedSpecialChars = allowedSpecialCharsArr.join('');
+	}
 
 	const uppercaseWeightedString = CHARACTERS_UPPERCASE.repeat(weight.uppercase);
 	const lowercaseWeightedString = CHARACTERS_LOWERCASE.repeat(weight.lowercase);
 	const numbersWeightedString = CHARACTERS_NUMBERS.repeat(weight.numbers);
+	const allowedSpecialCharsLength =
+		allowedSpecialChars.length === 0 ? 1 : allowedSpecialChars.length;
+	const allowedSpecialCharsRepeat =
+		weight.special * (CHARACTERS_SPECIAL.length / allowedSpecialCharsLength);
 
-	const specialCharsRepeat =
-		weight.special * (CHARACTERS_SPECIAL.length / customSpecialChars.length);
-
-	const specialWeightedString = customSpecialChars.repeat(specialCharsRepeat);
+	const specialWeightedString = allowedSpecialChars.repeat(allowedSpecialCharsRepeat);
 
 	const weightedCharsString =
 		uppercaseWeightedString +
@@ -101,9 +103,13 @@ function getRandomINT(max: number): number {
 }
 
 export function generatePassword(length: number, options?: GeneratePWOpts): string {
-	const { blacklistedChars, whitelistedChars, weight } = options;
+	const { customSpecialChars, customSpecialCharsType, weight } = options;
 
-	const characterString = generateCharacterString(blacklistedChars, whitelistedChars, weight);
+	const characterString = generateCharacterString(
+		customSpecialChars,
+		customSpecialCharsType,
+		weight
+	);
 
 	const fixLengthEmptyArray = new Array(length).fill(null);
 	const passwordArray = fixLengthEmptyArray.map(() => {
