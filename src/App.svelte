@@ -91,7 +91,7 @@
 			</label>
 		</div>
 		<h2
-			class="text-base sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
+			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
 		>
 			{@html highlightedToken}
 		</h2>
@@ -100,21 +100,21 @@
 	<div class="flex gap-5 justify-center items-center">
 		<button
 			on:click={copyToClipboard}
-			class="rounded-md w-60 text-slate-800 bg-sky-400 py-2 px-4 sm:py-3 sm:px-6 font-bold hover:text-white "
+			class="text-sm sm:text-base rounded-md w-52 sm:w-60 text-slate-800 bg-sky-400 py-2 px-2 sm:py-3 sm:px-6 font-bold hover:text-white "
 			>{buttonText}</button
 		>
-		<button on:click={regeneratePassword} class="bg-slate-100 p-3 rounded-md hover:bg-slate-300">
+		<button on:click={regeneratePassword} class="settings-button">
 			<i>
-				<SyncIcon class="h-4 w-4 sm:h-6 sm:w-6" />
+				<SyncIcon class=" w-4 sm:w-6" />
 			</i>
 		</button>
 		<button
 			on:click={() => {
 				modalShow = true;
 			}}
-			class="bg-slate-100 p-3 rounded-md hover:bg-slate-300"
+			class="settings-button"
 			><i>
-				<SettingsIcon class="h-4 w-4 sm:h-6 sm:w-6" />
+				<SettingsIcon class="w-4 sm:w-6" />
 			</i>
 		</button>
 	</div>
@@ -141,5 +141,8 @@
 <style>
 	input[type='radio'] {
 		display: none;
+	}
+	.settings-button {
+		@apply bg-slate-100 p-2 rounded-md hover:bg-slate-300;
 	}
 </style>
