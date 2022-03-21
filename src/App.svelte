@@ -16,7 +16,6 @@
 
 	// Import Types
 	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
-
 	let password: string;
 	let highlightedToken: string;
 	let buttonText = 'Copy Password';
@@ -25,7 +24,6 @@
 	let customSpecialChars: CustomSpecialChars = '';
 	let customSpecialCharsType: CustomSpecialCharsType = 'whitelist';
 	let tokenType = 'password';
-
 	function getToken() {
 		password = generatePassword(pwLength, {
 			customSpecialChars,
