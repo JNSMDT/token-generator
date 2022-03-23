@@ -26,7 +26,7 @@ export interface CharacterWeight {
 
 export type CustomSpecialChars = string;
 export type CustomSpecialCharsType = 'blacklist' | 'whitelist';
-export interface GeneratePWOpts {
+export interface GeneratePWOptions {
 	customSpecialChars?: CustomSpecialChars
 	customSpecialCharsType?: CustomSpecialCharsType
 	weight?: CharacterWeight
@@ -36,13 +36,13 @@ export interface GeneratePWOpts {
  * FUNCTIONS
  */
 export function saveToSessionStorage(token: string): void {
-	const timestamp = new Date().getTime();
+	const timestamp = Date.now();
 	const key = `token-${timestamp}`;
 
 	sessionStorage.setItem(key, token);
 	setTimeout(() => {
 		sessionStorage.removeItem(key);
-	}, 10000 * 60 * 60);
+	}, 1000 * 60 * 60);
 }
 
 /**
@@ -65,12 +65,12 @@ function generateCharacterString(
 		 * overwriting the potentional given blacklist. This means you can't have a blacklist and a
 		 * whitelist at the same time, what in my opinion doesn't make sense anyway.
 		 */
-		const allowedSpecialCharsArr = Array.from(CHARACTERS_SPECIAL).filter((char) => {
+		const allowedSpecialCharsArray = [...CHARACTERS_SPECIAL].filter((char) => {
 			if (customSpecialCharsType === 'whitelist') return customSpecialChars.includes(char);
 			return !customSpecialChars.includes(char);
 		});
 
-		allowedSpecialChars = allowedSpecialCharsArr.join('');
+		allowedSpecialChars = allowedSpecialCharsArray.join('');
 	}
 	const uppercaseWeightedString = CHARACTERS_UPPERCASE.repeat(weight.uppercase);
 	const lowercaseWeightedString = CHARACTERS_LOWERCASE.repeat(weight.lowercase);
@@ -90,21 +90,21 @@ function cryptoRand(): number {
 	const randomBuffer = new Uint32Array(1);
 
 	crypto.getRandomValues(randomBuffer);
-	return randomBuffer[0] / (0xFFFFFFFF + 1);
+	return randomBuffer[0] / (0xFF_FF_FF_FF + 1);
 }
 
 function getRandomINT(max: number): number {
 	return Math.ceil(cryptoRand() * max);
 }
 
-export function generatePassword(length: number, options?: GeneratePWOpts): string {
+export function generatePassword(length: number, options?: GeneratePWOptions): string {
 	const { customSpecialChars, customSpecialCharsType, weight } = options;
 	const characterString = generateCharacterString(
 		customSpecialChars,
 		customSpecialCharsType,
 		weight
 	);
-	const fixLengthEmptyArray = new Array(length).fill(null);
+	const fixLengthEmptyArray = Array.from({ length });
 	const passwordArray = fixLengthEmptyArray.map(() => {
 		const randINT = getRandomINT(characterString.length);
 
@@ -116,19 +116,15 @@ export function generatePassword(length: number, options?: GeneratePWOpts): stri
 }
 
 export function syntaxHighlight(password: string): string {
-	const passwordArray = password.split('');
+	const passwordArray = [...password];
 	const highlightedPasswordArray = passwordArray.map((char) => {
-		if (CHARACTERS_NUMBERS.includes(char))
-			return `<span class='number'>${char}</span>`;
+		if (CHARACTERS_NUMBERS.includes(char)) { return `<span class='number'>${char}</span>`; }
 
-		if (CHARACTERS_SPECIAL.includes(char))
-			return `<span class='special'>${char}</span>`;
+		if (CHARACTERS_SPECIAL.includes(char)) { return `<span class='special'>${char}</span>`; }
 
-		if (CHARACTERS_UPPERCASE.includes(char))
-			return `<span class='uppercase'>${char}</span>`;
+		if (CHARACTERS_UPPERCASE.includes(char)) { return `<span class='uppercase'>${char}</span>`; }
 
-		if (CHARACTERS_LOWERCASE.includes(char))
-			return `<span class='lowercase'>${char}</span>`;
+		if (CHARACTERS_LOWERCASE.includes(char)) { return `<span class='lowercase'>${char}</span>`; }
 
 		return char;
 	});

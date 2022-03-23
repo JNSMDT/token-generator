@@ -7,7 +7,6 @@
 		convertToBase64,
 		saveToSessionStorage
 	} from '$lib/functions/generateTokens';
-	import pkg from '../package.json';
 
 	// Import Icons
 	import GithubIcon from '$assets/icons/github.svelte';
@@ -16,6 +15,8 @@
 
 	// Import Types
 	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
+	import packageJSON from '../package.json';
+
 	let password: string;
 	let highlightedToken: string;
 	let buttonText = 'Copy Password';
@@ -43,17 +44,17 @@
 		getToken();
 	}
 
-	async function copyToClipboard() {
-		await navigator.clipboard.writeText(password);
-		saveToSessionStorage(password);
-		await changeButtonText();
-	}
-
 	async function changeButtonText() {
 		buttonText = 'Copied';
 		setTimeout(() => {
 			buttonText = 'Copy Password';
 		}, 2000);
+	}
+
+	async function copyToClipboard() {
+		await navigator.clipboard.writeText(password);
+		saveToSessionStorage(password);
+		await changeButtonText();
 	}
 </script>
 
@@ -119,7 +120,7 @@
 		</button>
 	</div>
 	<div class="flex absolute bottom-2 right-6 items-center gap-2 font-bold text-sm text-sky-400">
-		<p>v{pkg.version}</p>
+		<p>v{packageJSON.version}</p>
 		|
 		<a href="https://github.com/angertitan/cryptosubtle-pw-generator">
 			<i>
@@ -142,7 +143,5 @@
 	input[type='radio'] {
 		display: none;
 	}
-	.settings-button {
-		@apply bg-slate-100 p-2 rounded-md hover:bg-slate-300;
-	}
+
 </style>

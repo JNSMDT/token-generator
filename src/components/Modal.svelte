@@ -13,6 +13,7 @@
 	let inputCustomSpecialChars = customSpecialChars;
 	let inputCustomSpecialCharsType = customSpecialCharsType;
 
+	// Methods
 	function handleSaveSettings() {
 		pwLength = inputPwLength;
 		customSpecialChars = inputCustomSpecialChars;
@@ -22,6 +23,11 @@
 		dispatch('regeneratePassword');
 	}
 
+	function closeModal() {
+		show = false;
+	}
+
+	// Handler
 	function handleKeyPress(event) {
 		if (event.keyCode !== 27) {
 			return;
@@ -30,9 +36,6 @@
 		closeModal();
 	}
 
-	function closeModal() {
-		show = false;
-	}
 </script>
 
 <svelte:window on:keyup={handleKeyPress} />

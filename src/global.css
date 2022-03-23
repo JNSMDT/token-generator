@@ -85,3 +85,8 @@
 .radio-text {
 	@apply text-slate-800 font-bold;
 }
+
+.settings-button {
+	/* eslint-disable */
+	@apply bg-slate-100 p-2 rounded-md hover:bg-slate-300;
+}
