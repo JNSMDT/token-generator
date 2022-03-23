@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { resolve } from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
