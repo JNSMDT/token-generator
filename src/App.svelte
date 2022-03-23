@@ -91,6 +91,8 @@
 		<h2
 			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
 		>
+		<!-- TODO: Find another way to insert highlighted token into HTML -->
+		<!-- eslint-disable-next-line -->
 			{@html highlightedToken}
 		</h2>
 	</div>
