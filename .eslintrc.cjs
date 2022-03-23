@@ -1,5 +1,4 @@
 module.exports = {
-
 	extends: [
 		'airbnb-base',
 		'plugin:unicorn/recommended',
@@ -130,7 +129,7 @@ module.exports = {
 				'import/no_duplicates': 'off',
 				'import/no-mutable-exports': 'off',
 				'import/prefer-default-export': 'off',
-				'import/no-extraneous-dependencies': 'off'
+				'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
 			}
 		},
 		{
@@ -187,6 +186,12 @@ module.exports = {
 						order: { type: 'asc' }
 					}
 				]
+			}
+		},
+		{
+			files: ['**/*.config.*'],
+			rules: {
+				'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
 			}
 		}
 	]
