@@ -1,10 +1,14 @@
+<script context="module">
+	export const ssr = false;
+</script>
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$components/Modal.svelte';
 	import {
 		generatePassword,
 		syntaxHighlight,
-		convertToBase64,
+		generateBase64Token,
 		saveToSessionStorage
 	} from '$lib/functions/generateTokens';
 
@@ -15,7 +19,6 @@
 
 	// Import Types
 	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
-	import packageJSON from '../package.json';
 
 	let password: string;
 	let highlightedToken: string;
@@ -31,7 +34,7 @@
 			customSpecialCharsType
 		});
 		if (tokenType === 'b64token') {
-			password = convertToBase64(password);
+			password = generateBase64Token(pwLength);
 		}
 		highlightedToken = syntaxHighlight(password);
 	}
@@ -120,7 +123,7 @@
 		</button>
 	</div>
 	<div class="flex absolute bottom-2 right-6 items-center gap-2 font-bold text-sm text-sky-400">
-		<p>v{packageJSON.version}</p>
+		<p>v{__VERSION__}</p>
 		|
 		<a href="https://github.com/angertitan/cryptosubtle-pw-generator">
 			<i>

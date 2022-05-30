@@ -2,9 +2,9 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
 	mode: 'jit',
-	content: ['./public/index.html', './src/**/*.svelte'],
+	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		height: theme => ({
+		height: (theme) => ({
 			auto: 'auto',
 			...theme('spacing'),
 			full: '100%',

@@ -44,6 +44,7 @@ module.exports = {
 			{ blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
 		],
 
+		'no-underscore-dangle': 'off',
 		// import
 		'import/no-unresolved': 'off',
 		'import/order': 'error',
