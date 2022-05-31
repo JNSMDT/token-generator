@@ -63,30 +63,8 @@
 	</h1>
 	<div class="flex flex-col gap-10">
 		<div class="flex justify-center mx-auto gap-[10%]">
-			<input
-				id="passwordRadio"
-				type="radio"
-				bind:group={tokenType}
-				name="tokenTypes"
-				value={'password'}
-				on:change={regeneratePassword}
-			/>
-			<input
-				id="b64Radio"
-				type="radio"
-				bind:group={tokenType}
-				name="tokenTypes"
-				value={'b64token'}
-				on:change={regeneratePassword}
-			/>
-			<label class="radio-label radio-label-pw" for="passwordRadio">
-				<span class="radio-dot" />
-				<span class="radio-text"> Password </span>
-			</label>
-			<label class="radio-label radio-label-tkn" for="b64Radio">
-				<span class="radio-dot" />
-				<span class="radio-text"> Base64 Token </span>
-			</label>
+			<RadioButton id='pwRadio' bind:group={tokenType} groupName="tokenTypes" value="password" label="Password" changeFunction={regeneratePassword}/>
+			<RadioButton id='b64Radio' bind:group={tokenType} groupName="tokenTypes" value="b64Token" label="Base64 Token" changeFunction={regeneratePassword}/>
 		</div>
 		<h2
 			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
