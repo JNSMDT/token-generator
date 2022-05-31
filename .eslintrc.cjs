@@ -119,8 +119,7 @@ module.exports = {
 			files: ['*.svelte'],
 			parser: 'svelte-eslint-parser',
 			parserOptions: {
-				parser: '@typescript-eslint/parser',
-				project: './tsconfig.json'
+				parser: '@typescript-eslint/parser'
 			},
 			env: { browser: true, node: false },
 			rules: {
