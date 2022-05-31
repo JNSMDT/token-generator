@@ -138,9 +138,10 @@ export function syntaxHighlight(password: string): string {
 	return highlightedPasswordArray.join('');
 }
 
-export function convertToBase64(pw: string): string {
-	const passwordUInt8Array = new TextEncoder().encode(pw);
-	const b64String = base64.stringify(passwordUInt8Array, { pad: false });
+export function generateBase64Token(length: number): string {
+	const UInt8Array = crypto.getRandomValues(new Uint8Array(length));
+	const b64String = base64.stringify(UInt8Array);
+	const slicedB64String = b64String.slice(0, length);
 
-	return b64String;
+	return slicedB64String;
 }
