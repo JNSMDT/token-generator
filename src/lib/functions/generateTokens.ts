@@ -1,4 +1,4 @@
-import { base64 } from 'rfc4648';
+import { base64, base64url } from 'rfc4648';
 /**
  * CONSTANTS
  */
@@ -138,9 +138,9 @@ export function syntaxHighlight(password: string): string {
 	return highlightedPasswordArray.join('');
 }
 
-export function generateBase64Token(length: number): string {
+export function generateBase64Token(length: number, urlSafeToken = false): string {
 	const UInt8Array = crypto.getRandomValues(new Uint8Array(length));
-	const b64String = base64.stringify(UInt8Array);
+	const b64String = urlSafeToken ? base64url.stringify(UInt8Array) : base64.stringify(UInt8Array);
 	const slicedB64String = b64String.slice(0, length);
 
 	return slicedB64String;

@@ -70,18 +70,22 @@
 	opacity-0;
 }
 
-#passwordRadio:checked ~ .radio-label-pw,
-#b64Radio:checked ~ .radio-label-tkn {
+#pwRadio:checked ~ .radio-label-pwRadio,
+#b64Radio:checked ~ .radio-label-b64Radio,
+#b64URLRadio:checked ~ .radio-label-b64URLRadio {
 	@apply border-sky-500 bg-sky-500;
 }
-#passwordRadio:checked ~ .radio-label-pw .radio-dot,
-#b64Radio:checked ~ .radio-label-tkn .radio-dot {
+#pwRadio:checked ~ .radio-label-pwRadio .radio-dot,
+#b64Radio:checked ~ .radio-label-b64Radio .radio-dot,
+#b64URLRadio:checked ~ .radio-label-b64URLRadio .radio-dot {
 	@apply bg-slate-100;
 }
-#passwordRadio:checked ~ .radio-label-pw .radio-dot::before,
-#b64Radio:checked ~ .radio-label-tkn .radio-dot::before {
+#pwRadio:checked ~ .radio-label-pwRadio .radio-dot::before,
+#b64Radio:checked ~ .radio-label-b64Radio .radio-dot::before,
+#b64URLRadio:checked ~ .radio-label-b64URLRadio .radio-dot::before {
 	@apply opacity-100 scale-100;
 }
+
 .radio-text {
 	@apply text-slate-800 font-bold;
 }

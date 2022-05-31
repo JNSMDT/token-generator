@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$components/Modal.svelte';
-
+	import RadioButton from '$components/RadioButton.svelte';
 	// Import Icons
 	import GithubIcon from '$assets/icons/github.svelte';
 	import SettingsIcon from '$assets/icons/settings.svelte';
@@ -25,13 +25,22 @@
 	let customSpecialCharsType: CustomSpecialCharsType = 'whitelist';
 	let tokenType = 'password';
 	function getToken() {
-		password = generatePassword(pwLength, {
-			customSpecialChars,
-			customSpecialCharsType
-		});
-		if (tokenType === 'b64token') {
-			password = generateBase64Token(pwLength);
+		switch (tokenType) {
+			case 'b64Token':
+				password = generateBase64Token(pwLength);
+				break;
+
+			case 'b64URLToken':
+				password = generateBase64Token(pwLength, true);
+				break;
+			default:
+				password = generatePassword(pwLength, {
+					customSpecialChars,
+					customSpecialCharsType
+				});
+				break;
 		}
+
 		highlightedToken = syntaxHighlight(password);
 	}
 
@@ -65,6 +74,7 @@
 		<div class="flex justify-center mx-auto gap-[10%]">
 			<RadioButton id='pwRadio' bind:group={tokenType} groupName="tokenTypes" value="password" label="Password" changeFunction={regeneratePassword}/>
 			<RadioButton id='b64Radio' bind:group={tokenType} groupName="tokenTypes" value="b64Token" label="Base64 Token" changeFunction={regeneratePassword}/>
+			<RadioButton id='b64URLRadio' bind:group={tokenType} groupName="tokenTypes" value="b64URLToken" label="Base64 URL Token" changeFunction={regeneratePassword}/>
 		</div>
 		<h2
 			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
@@ -114,10 +124,3 @@
 		bind:customSpecialCharsType
 	/>
 </main>
-
-<style>
-	input[type='radio'] {
-		display: none;
-	}
-
-</style>
