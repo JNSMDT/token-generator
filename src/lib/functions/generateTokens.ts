@@ -97,7 +97,13 @@ function getRandomINT(max: number): number {
 	return Math.ceil(cryptoRand() * max);
 }
 
-export function generatePassword(length: number, options?: GeneratePWOptions): string {
+const DEFAULT_OPTIONS:GeneratePWOptions = {
+	customSpecialChars: '',
+	customSpecialCharsType: 'whitelist',
+	weight: DEFAULT_WEIGHT
+};
+
+export function generatePassword(length: number, options = DEFAULT_OPTIONS): string {
 	const { customSpecialChars, customSpecialCharsType, weight } = options;
 	const characterString = generateCharacterString(
 		customSpecialChars,
