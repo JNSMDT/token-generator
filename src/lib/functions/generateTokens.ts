@@ -7,10 +7,10 @@ const CHARACTERS_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'; // 26
 const CHARACTERS_NUMBERS = '0123456789'; // 10
 const CHARACTERS_SPECIAL = '*+,-_.()/@!?#$%&"\':;[]^`{}~<=>'; // 30
 const DEFAULT_WEIGHT = {
-	uppercase: 2,
-	lowercase: 2,
-	numbers: 3,
-	special: 1
+	uppercase: 2, // 52
+	lowercase: 2, // 52
+	numbers: 4, // 50
+	special: 1 // 30
 };
 
 /**
