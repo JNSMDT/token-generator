@@ -1,3 +1,4 @@
+// FIXME: this needs some polish and cleanup to work properly
 module.exports = {
 	extends: [
 		'airbnb-base',
