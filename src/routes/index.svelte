@@ -5,17 +5,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$components/Modal.svelte';
+
+	// Import Icons
+	import GithubIcon from '$assets/icons/github.svelte';
+	import SettingsIcon from '$assets/icons/settings.svelte';
+	import SyncIcon from '$assets/icons/sync.svelte';
 	import {
 		generatePassword,
 		syntaxHighlight,
 		generateBase64Token,
 		saveToSessionStorage
 	} from '$lib/functions/generateTokens';
-
-	// Import Icons
-	import GithubIcon from '$assets/icons/github.svelte';
-	import SettingsIcon from '$assets/icons/settings.svelte';
-	import SyncIcon from '$assets/icons/sync.svelte';
 
 	// Import Types
 	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
