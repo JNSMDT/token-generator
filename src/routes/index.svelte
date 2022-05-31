@@ -1,7 +1,3 @@
-<script context="module">
-	export const ssr = false;
-</script>
-
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$components/Modal.svelte';
