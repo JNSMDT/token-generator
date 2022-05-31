@@ -9,6 +9,4 @@ declare namespace App {
 	// interface Stuff {}
 }
 
-declare global {
-	const __VERSION__: string;
-}
+declare const __VERSION__: string;

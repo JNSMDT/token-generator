@@ -118,10 +118,12 @@ module.exports = {
 			files: ['*.svelte'],
 			parser: 'svelte-eslint-parser',
 			parserOptions: {
-				parser: '@typescript-eslint/parser'
+				parser: '@typescript-eslint/parser',
+				project: './tsconfig.json'
 			},
 			env: { browser: true, node: false },
 			rules: {
+				'no-undef': 'off',
 				'no-inner-declarations': 'off',
 				'no-unused-vars': 'off',
 				'no-self-assign': 'off',
@@ -136,7 +138,13 @@ module.exports = {
 		{
 			files: ['src/**/*.ts', 'src/**/*.js'],
 			parser: '@typescript-eslint/parser',
-			env: { browser: true, node: false }
+			parserOptions: {
+				project: './tsconfig.json'
+			},
+			env: { browser: true, node: true },
+			rules: {
+				'no-undef': 'off'
+			}
 		},
 		{
 			files: ['*.json', '*.json5', '*.jsonc'],
@@ -191,6 +199,7 @@ module.exports = {
 		},
 		{
 			files: ['**/*.config.*'],
+			env: { node: true },
 			rules: {
 				'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
 			}
