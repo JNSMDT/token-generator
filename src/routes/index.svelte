@@ -3,9 +3,9 @@
 	import Modal from '$components/Modal.svelte';
 	import RadioButton from '$components/RadioButton.svelte';
 	// Import Icons
-	import GithubIcon from '$assets/icons/github.svelte';
-	import SettingsIcon from '$assets/icons/settings.svelte';
-	import SyncIcon from '$assets/icons/sync.svelte';
+	import GithubIcon from '$assets/icons/github.svg';
+	import SettingsIcon from '$assets/icons/settings.svg';
+	import SyncIcon from '$assets/icons/sync.svg';
 	import {
 		generatePassword,
 		syntaxHighlight,
@@ -91,8 +91,8 @@
 			>{buttonText}</button
 		>
 		<button on:click={regeneratePassword} class="settings-button">
-			<i>
-				<SyncIcon class=" w-4 sm:w-6" />
+			<i class="block w-5 sm:w-6">
+				<SyncIcon />
 			</i>
 		</button>
 		<button
@@ -100,8 +100,8 @@
 				modalShow = true;
 			}}
 			class="settings-button"
-			><i>
-				<SettingsIcon class="w-4 sm:w-6" />
+			><i class="block w-5 sm:w-6">
+				<SettingsIcon />
 			</i>
 		</button>
 	</div>
@@ -109,8 +109,8 @@
 		<p>v{__VERSION__}</p>
 		|
 		<a href="https://github.com/angertitan/cryptosubtle-pw-generator">
-			<i>
-				<GithubIcon class="w-4 fill-slate-50/50 hover:fill-slate-50" />
+			<i class="block w-5 fill-slate-50/50 hover:fill-slate-50">
+				<GithubIcon/>
 			</i>
 		</a>
 		|

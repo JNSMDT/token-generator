@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import CancelIcon from '$assets/icons/cross.svelte';
+	import CancelIcon from '$assets/icons/cross.svg';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -28,8 +28,8 @@
 	}
 
 	// Handler
-	function handleKeyPress(event) {
-		if (event.keyCode !== 27) {
+	function handleKeyPress(event: KeyboardEvent) {
+		if (event.key !== 'ESC') {
 			return;
 		}
 
@@ -97,9 +97,11 @@
 					/>
 				</div>
 
-				<button class="absolute top-4 right-4" on:click={closeModal}
-					><i><CancelIcon class="w-6" /></i></button
-				>
+				<button class="absolute top-4 right-4" on:click={closeModal}>
+					<i class="block w-5 sm:w-6">
+						<CancelIcon />
+					</i>
+				</button>
 			</div>
 			<button
 				class="mt-10 mb-4 p-4  mx-auto rounded-md w-60 bg-sky-400 py-3 px-6 font-bold hover:text-white"
