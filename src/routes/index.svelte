@@ -15,7 +15,9 @@
 
 	// Import Types
 	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
+	import { dev } from '$app/env';
 
+	const title = dev ? '(dev) Webcrypto Token Generator' : 'Webcrypto Token Geenrator';
 	let password: string;
 	let highlightedToken: string;
 	let buttonText = 'Copy Password';
@@ -66,6 +68,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
 <main class="bg-sky-300 px-4 py-[10vh] flex flex-col justify-evenly items-center h-screen">
 	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">
 		WebCrypto Token Generator 🔐
