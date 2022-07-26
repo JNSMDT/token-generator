@@ -6,7 +6,7 @@ module.exports = {
 		'plugin:import/recommended',
 		'plugin:import/typescript',
 		'plugin:jsonc/recommended-with-jsonc',
-		'plugin:@ota-meshi/svelte/recommended',
+		'plugin:svelte/recommended',
 		'plugin:@typescript-eslint/recommended'
 	],
 	parserOptions: {
@@ -21,7 +21,7 @@ module.exports = {
 		},
 		'import/resolver': {
 			typescript: {
-				directory: './tsconfig.json'
+				project: './tsconfig.json'
 			},
 			node: {
 				extensions: ['.js', '.jsx', '.ts', '.tsx']
@@ -132,7 +132,9 @@ module.exports = {
 				'import/no_duplicates': 'off',
 				'import/no-mutable-exports': 'off',
 				'import/prefer-default-export': 'off',
-				'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
+				'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+				'svelte/valid-compile': 'off',
+				'import/extensions': 'off'
 			}
 		},
 		{
