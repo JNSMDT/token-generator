@@ -9,6 +9,7 @@
 
 <div class={`radio-btn-${id}`}>
 	<input
+	class="peer"
 	id={id}
 	type="radio"
 	bind:group={group}
@@ -16,9 +17,8 @@
 	value={value}
 	on:change={changeFunction}
 	/>
-	<label class={`radio-label radio-label-${id}`} for={id}>
-		<span class="radio-dot" />
-		<span class="radio-text"> {label} </span>
+	<label class="flex justify-center bg-white sm:text-base text-sm sm:min-w-[200px] min-w-[150px] rounded-md cursor-pointer p-2 border-2 border-slate-300 peer-checked:border-sky-500/20 peer-checked:bg-sky-400" for={id}>
+		<span class="text-slate-800 font-bold font-mono text-lg"> {label} </span>
 	</label>
 </div>
 

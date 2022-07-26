@@ -77,14 +77,35 @@
 	</h1>
 	<div class="flex flex-col gap-10">
 		<div class="flex justify-center mx-auto gap-[10%]">
-			<RadioButton id='pwRadio' bind:group={tokenType} groupName="tokenTypes" value="password" label="Password" changeFunction={regeneratePassword}/>
-			<RadioButton id='b64Radio' bind:group={tokenType} groupName="tokenTypes" value="b64Token" label="Base64 Token" changeFunction={regeneratePassword}/>
-			<RadioButton id='b64URLRadio' bind:group={tokenType} groupName="tokenTypes" value="b64URLToken" label="Base64 URL Token" changeFunction={regeneratePassword}/>
+			<RadioButton
+				id="pwRadio"
+				bind:group={tokenType}
+				groupName="tokenTypes"
+				value="password"
+				label="Password"
+				changeFunction={regeneratePassword}
+			/>
+			<RadioButton
+				id="b64Radio"
+				bind:group={tokenType}
+				groupName="tokenTypes"
+				value="b64Token"
+				label="Base64 Token"
+				changeFunction={regeneratePassword}
+			/>
+			<RadioButton
+				id="b64URLRadio"
+				bind:group={tokenType}
+				groupName="tokenTypes"
+				value="b64URLToken"
+				label="Base64 URL Token"
+				changeFunction={regeneratePassword}
+			/>
 		</div>
 		<h2
 			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
 		>
-		<!-- eslint-disable-next-line -->
+			<!-- eslint-disable-next-line -->
 			{@html highlightedToken}
 		</h2>
 	</div>
@@ -92,10 +113,23 @@
 	<div class="flex gap-5 justify-center items-center">
 		<button
 			on:click={copyToClipboard}
-			class="text-sm sm:text-base rounded-md w-52 sm:w-60 text-slate-800 bg-sky-400 py-2 px-2 sm:py-3 sm:px-6 font-bold hover:text-white "
-			>{buttonText}</button
+			class="
+			text-sm
+			sm:text-base
+			rounded-md w-52
+			sm:w-60
+			text-slate-800
+			bg-sky-400
+			border-2
+			border-sky-500/25
+			py-2 px-2
+			sm:py-3 sm:px-6
+			font-bold
+			hover:text-white"
 		>
-		<button on:click={regeneratePassword} class="settings-button">
+			{buttonText}</button
+		>
+		<button on:click={regeneratePassword} class="bg-slate-100 p-2 rounded-md hover:bg-slate-300">
 			<i class="block w-5 sm:w-6">
 				<SyncIcon />
 			</i>
@@ -104,7 +138,7 @@
 			on:click={() => {
 				modalShow = true;
 			}}
-			class="settings-button"
+			class="bg-slate-100 p-2 rounded-md hover:bg-slate-300"
 			><i class="block w-5 sm:w-6">
 				<SettingsIcon />
 			</i>
@@ -115,7 +149,7 @@
 		|
 		<a href="https://github.com/angertitan/cryptosubtle-pw-generator">
 			<i class="block w-5 fill-slate-50/50 hover:fill-slate-50">
-				<GithubIcon/>
+				<GithubIcon />
 			</i>
 		</a>
 		|
