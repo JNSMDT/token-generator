@@ -1,11 +1,11 @@
 // FIXME: Why is this only working without ssr?!
 /* eslint-disable import/prefer-default-export */
-import type { Handle } from '@sveltejs/kit';
 
-export const handle:Handle = async ({ event, resolve }) => {
+/** @type {import('@sveltejs/kit').Handle} */
+export async function handle({ event, resolve }) {
 	const response = await resolve(event, {
 		ssr: false
 	});
 
 	return response;
-};
+}

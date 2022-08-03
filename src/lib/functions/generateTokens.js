@@ -13,29 +13,19 @@ const DEFAULT_WEIGHT = {
 	special: 1 // 30
 };
 
-/**
- * INTERFACES
- */
-export interface CharacterWeight {
-	uppercase: number
-	lowercase: number
-	numbers: number
-	special: number
-
-}
-
-export type CustomSpecialChars = string;
-export type CustomSpecialCharsType = 'blacklist' | 'whitelist';
-export interface GeneratePWOptions {
-	customSpecialChars?: CustomSpecialChars
-	customSpecialCharsType?: CustomSpecialCharsType
-	weight?: CharacterWeight
-}
+/** @typedef {import("./types").CustomSpecialChars} CustomSpecialChars */
+/** @typedef {import("./types").CustomSpecialCharsType} CustomSpecialCharsType */
+/** @typedef {import("./types").CharacterWeight} CharacterWeight */
+/** @typedef {import("./types").GeneratePWOptions} GeneratePWOptions */
 
 /**
  * FUNCTIONS
  */
-export function saveToSessionStorage(token: string): void {
+/**
+ *
+ * @param {string} token the generated token as string
+ */
+export function saveToSessionStorage(token) {
 	const timestamp = Date.now();
 	const key = `token-${timestamp}`;
 
@@ -46,16 +36,12 @@ export function saveToSessionStorage(token: string): void {
 }
 
 /**
- * @param customSpecialChars A string that contains custom characters that should be either whitelisted or blacklisted
- * @param customSpecialCharsType  A string that determines if the custom characters either should be a blacklist or whitelist. Defaults to whitelist.
- * @param weight A object that determines how frequent a specific type of characters appear
- * @returns
+ * @param {CustomSpecialChars} customSpecialChars A string that contains custom characters that should be either whitelisted or blacklisted
+ * @param {CustomSpecialCharsType} customSpecialCharsType  A string that determines if the custom characters either should be a blacklist or whitelist. Defaults to whitelist.
+ * @param {CharacterWeight} weight A object that determines how frequent a specific type of characters appear
+ * @returns {string}
  */
-function generateCharacterString(
-	customSpecialChars: CustomSpecialChars = '',
-	customSpecialCharsType: CustomSpecialCharsType = 'whitelist',
-	weight: CharacterWeight = DEFAULT_WEIGHT
-): string {
+function generateCharacterString(customSpecialChars = '', customSpecialCharsType = 'whitelist', weight = DEFAULT_WEIGHT) {
 	let allowedSpecialChars = CHARACTERS_SPECIAL;
 
 	// skip if customSpecialChars is empty
@@ -86,24 +72,41 @@ function generateCharacterString(
 	return weightedCharsString;
 }
 
-function cryptoRand(): number {
+/**
+ * generates a csprng number?
+ * @returns {number}
+ */
+function cryptoRand() {
 	const randomBuffer = new Uint32Array(1);
 
 	crypto.getRandomValues(randomBuffer);
-	return randomBuffer[0] / (0xFF_FF_FF_FF + 1);
+	const max32BitNumber = 0xFF_FF_FF_FF;
+
+	return randomBuffer[0] / (max32BitNumber + 1);
 }
 
-function getRandomINT(max: number): number {
+/**
+ * Returns a random number from 1 to max
+ * @param {number} max maximum int that can be generated
+ * @returns {number}
+ */
+function getRandomINT(max) {
 	return Math.ceil(cryptoRand() * max);
 }
-
-const DEFAULT_OPTIONS:GeneratePWOptions = {
+/** @type {GeneratePWOptions} */
+const DEFAULT_OPTIONS = {
 	customSpecialChars: '',
 	customSpecialCharsType: 'whitelist',
 	weight: DEFAULT_WEIGHT
 };
 
-export function generatePassword(length: number, options = DEFAULT_OPTIONS): string {
+/**
+ * generate a new password based on given options
+ * @param {number} length password length to be generated
+ * @param {GeneratePWOptions} options password generate options
+ * @returns {string} the generated password string
+ */
+export function generatePassword(length, options = DEFAULT_OPTIONS) {
 	const { customSpecialChars, customSpecialCharsType, weight } = options;
 	const characterString = generateCharacterString(
 		customSpecialChars,
@@ -121,7 +124,12 @@ export function generatePassword(length: number, options = DEFAULT_OPTIONS): str
 	return password;
 }
 
-export function syntaxHighlight(password: string): string {
+/**
+ * generate html from the password string to highlight with css
+ * @param {string} password the password string
+ * @returns {string} html representation of the syntaxed password
+ */
+export function syntaxHighlight(password) {
 	const passwordArray = [...password];
 	const highlightedPasswordArray = passwordArray.map((char) => {
 		if (CHARACTERS_NUMBERS.includes(char)) { return `<span class='number'>${char}</span>`; }
@@ -138,7 +146,13 @@ export function syntaxHighlight(password: string): string {
 	return highlightedPasswordArray.join('');
 }
 
-export function generateBase64Token(length: number, urlSafeToken = false): string {
+/**
+ * generate a base64 token based on the generated password
+ * @param {number} length the max length of the token
+ * @param {boolean} urlSafeToken option to make the token url save
+ * @returns {string} b64 token string
+ */
+export function generateBase64Token(length, urlSafeToken = false) {
 	const UInt8Array = crypto.getRandomValues(new Uint8Array(length));
 	const b64String = urlSafeToken ? base64url.stringify(UInt8Array) : base64.stringify(UInt8Array);
 	const slicedB64String = b64String.slice(0, length);

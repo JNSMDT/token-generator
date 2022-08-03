@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
 	import { fade } from 'svelte/transition';
-	import CancelIcon from '$assets/icons/cross.svg';
 	import { createEventDispatcher } from 'svelte';
+	import CancelIcon from '$assets/icons/cross.svg';
 
 	const dispatch = createEventDispatcher();
 
@@ -28,7 +28,11 @@
 	}
 
 	// Handler
-	function handleKeyPress(event: KeyboardEvent) {
+	/**
+	 *
+	 * @param {KeyboardEvent} event
+	 */
+	function handleKeyPress(event) {
 		if (event.key !== 'ESC') {
 			return;
 		}

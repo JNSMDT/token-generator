@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import { onMount } from 'svelte';
 	import Modal from '$components/Modal.svelte';
 	import RadioButton from '$components/RadioButton.svelte';
@@ -13,18 +13,24 @@
 		saveToSessionStorage
 	} from '$lib/functions/generateTokens';
 
+/** @typedef {import("../lib/functions/types").CustomSpecialChars} CustomSpecialChars */
+/** @typedef {import("../lib/functions/types").CustomSpecialCharsType} CustomSpecialCharsType */
+
 	// Import Types
-	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
 	import { dev } from '$app/env';
 
 	const title = dev ? '(dev) Webcrypto Token Generator' : 'Webcrypto Token Geenrator';
-	let password: string;
-	let highlightedToken: string;
+	/** @type {string} */
+	let password;
+	/** @type {string} */
+	let highlightedToken;
 	let buttonText = 'Copy Password';
 	let modalShow = false;
 	let pwLength = 30;
-	let customSpecialChars: CustomSpecialChars = '';
-	let customSpecialCharsType: CustomSpecialCharsType = 'whitelist';
+	/** @type {CustomSpecialChars} */
+	let customSpecialChars = '';
+	/** @type {CustomSpecialCharsType} */
+	let customSpecialCharsType = 'whitelist';
 	let tokenType = 'password';
 	function getToken() {
 		switch (tokenType) {
