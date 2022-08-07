@@ -1,7 +1,7 @@
 /**
  * INTERFACES
  */
-export interface CharacterWeight {
+export type CharacterWeight = {
 	uppercase: number
 	lowercase: number
 	numbers: number
@@ -13,7 +13,7 @@ export interface CharacterWeight {
  */
 export type CustomSpecialChars = string;
 export type CustomSpecialCharsType = 'blacklist' | 'whitelist';
-export interface GeneratePWOptions {
+export type GeneratePWOptions = {
 	customSpecialChars?: CustomSpecialChars
 	customSpecialCharsType?: CustomSpecialCharsType
 	weight?: CharacterWeight

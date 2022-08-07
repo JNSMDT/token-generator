@@ -11,10 +11,10 @@
 		syntaxHighlight,
 		generateBase64Token,
 		saveToSessionStorage
-	} from '$lib/functions/generateTokens';
+	} from '$lib/functions/token';
 
-/** @typedef {import("../lib/functions/types").CustomSpecialChars} CustomSpecialChars */
-/** @typedef {import("../lib/functions/types").CustomSpecialCharsType} CustomSpecialCharsType */
+/** @typedef {import("types").CustomSpecialChars} CustomSpecialChars */
+/** @typedef {import("types").CustomSpecialCharsType} CustomSpecialCharsType */
 
 	// Import Types
 	import { dev } from '$app/env';
