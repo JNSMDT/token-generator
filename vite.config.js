@@ -3,7 +3,13 @@ import svg from '@poppanator/sveltekit-svg';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-	plugins: [sveltekit(), svg()]
+	plugins: [sveltekit(), svg()],
+	test: {
+		globals: true,
+		environment: 'happy-dom',
+		include: ['test/**/*.{test,spec}.js'],
+		setupFiles: ['test/setup.js']
+	}
 };
 
 export default config;

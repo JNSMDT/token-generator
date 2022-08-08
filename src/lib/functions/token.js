@@ -87,11 +87,12 @@ function cryptoRand() {
 
 /**
  * Returns a random number from 1 to max
- * @param {number} max maximum int that can be generated
+ * @param {number} max end of random range (exclusive)
+ * @param {number} min start of random range (inclusive)
  * @returns {number}
  */
-function getRandomINT(max) {
-	return Math.ceil(cryptoRand() * max);
+function getRandomINT(max, min = 0) {
+	return Math.floor(cryptoRand() * (max - min + 1)) + min;
 }
 /** @type {GeneratePWOptions} */
 const DEFAULT_OPTIONS = {
@@ -119,7 +120,12 @@ export function generatePassword(length, options = DEFAULT_OPTIONS) {
 
 		return characterString.charAt(randINT);
 	});
-	const password = passwordArray.join('');
+
+	let password = passwordArray.join('');
+
+	if (password.length < length) {
+		password = generatePassword(length, options);
+	}
 
 	return password;
 }

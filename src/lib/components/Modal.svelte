@@ -1,7 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
-	import CancelIcon from '$assets/icons/cross.svg';
+	import CancelIcon from '$lib/assets/icons/cross.svg';
 
 	const dispatch = createEventDispatcher();
 

@@ -1,11 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
-	import Modal from '$components/Modal.svelte';
-	import RadioButton from '$components/RadioButton.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import RadioButton from '$lib/components/RadioButton.svelte';
 	// Import Icons
-	import GithubIcon from '$assets/icons/github.svg';
-	import SettingsIcon from '$assets/icons/settings.svg';
-	import SyncIcon from '$assets/icons/sync.svg';
+	import GithubIcon from '$lib/assets/icons/github.svg';
+	import SettingsIcon from '$lib/assets/icons/settings.svg';
+	import SyncIcon from '$lib/assets/icons/sync.svg';
 	import {
 		generatePassword,
 		syntaxHighlight,

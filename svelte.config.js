@@ -19,14 +19,7 @@ const config = {
 		]
 	}),
 
-	kit: {
-		adapter: adapter(),
-		alias: {
-			$lib: 'src/lib',
-			$assets: '/src/assets',
-			$components: '/src/components'
-		}
-	}
+	kit: { adapter: adapter()	}
 };
 
 export default config;

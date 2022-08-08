@@ -44,11 +44,7 @@ module.exports = {
 		'import/named': 'off',
 		'import/no-mutable-exports': 'error',
 		'import/no-absolute-path': 'off',
-		'import/extensions': ['error', 'ignorePackages', {
-			js: 'never',
-			jsx: 'never',
-			mjs: 'never'
-		}],
+		'import/extensions': 'off',
 
 		// Unicorn
 		// Pass error message when throwing errors
@@ -104,6 +100,10 @@ module.exports = {
 		]
 	},
 	overrides: [
+		{
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+      extends: ['plugin:testing-library/dom']
+    },
 		{
 			files: ['*.svelte'],
 			parser: 'svelte-eslint-parser',
