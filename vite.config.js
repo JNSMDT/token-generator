@@ -6,7 +6,6 @@ const config = {
 	plugins: [sveltekit(), svg()],
 	test: {
 		globals: true,
-		environment: 'happy-dom',
 		include: ['test/**/*.{test,spec}.js'],
 		setupFiles: ['test/setup.js']
 	}
