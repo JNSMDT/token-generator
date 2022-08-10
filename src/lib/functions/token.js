@@ -116,16 +116,12 @@ export function generatePassword(length, options = DEFAULT_OPTIONS) {
 	);
 	const fixLengthEmptyArray = Array.from({ length });
 	const passwordArray = fixLengthEmptyArray.map(() => {
-		const randINT = getRandomINT(characterString.length);
+		const randINT = getRandomINT(characterString.length - 1);
 
 		return characterString.charAt(randINT);
 	});
 
-	let password = passwordArray.join('');
-
-	if (password.length < length) {
-		password = generatePassword(length, options);
-	}
+	const password = passwordArray.join('');
 
 	return password;
 }
