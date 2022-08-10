@@ -13,13 +13,16 @@
 		saveToSessionStorage
 	} from '$lib/functions/token';
 
-/** @typedef {import("types").CustomSpecialChars} CustomSpecialChars */
-/** @typedef {import("types").CustomSpecialCharsType} CustomSpecialCharsType */
+/** @typedef {import("types/internal").CustomSpecialChars} CustomSpecialChars */
+/** @typedef {import("types/internal").CustomSpecialCharsType} CustomSpecialCharsType */
 
 	// Import Types
 	import { dev } from '$app/env';
 
 	const title = dev ? '(dev) Webcrypto Token Generator' : 'Webcrypto Token Geenrator';
+	// FIXME: JSDOC for globals
+	// @ts-ignore
+	const packageVersion = __VERSION__;
 	/** @type {string} */
 	let password;
 	/** @type {string} */
@@ -151,7 +154,8 @@
 		</button>
 	</div>
 	<div class="flex absolute bottom-2 right-6 items-center gap-2 font-bold text-sm text-sky-400">
-		<p>v{__VERSION__}</p>
+
+		<p>v{packageVersion}</p>
 		|
 		<a href="https://github.com/angertitan/cryptosubtle-pw-generator">
 			<i class="block w-5 fill-slate-50/50 hover:fill-slate-50">

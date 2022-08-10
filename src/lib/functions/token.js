@@ -13,10 +13,10 @@ const DEFAULT_WEIGHT = {
 	special: 1 // 30
 };
 
-/** @typedef {import("types").CustomSpecialChars} CustomSpecialChars */
-/** @typedef {import("types").CustomSpecialCharsType} CustomSpecialCharsType */
-/** @typedef {import("types").CharacterWeight} CharacterWeight */
-/** @typedef {import("types").GeneratePWOptions} GeneratePWOptions */
+/** @typedef {import("types/internal").CustomSpecialChars} CustomSpecialChars */
+/** @typedef {import("types/internal").CustomSpecialCharsType} CustomSpecialCharsType */
+/** @typedef {import("types/internal").CharacterWeight} CharacterWeight */
+/** @typedef {import("types/internal").GeneratePWOptions} GeneratePWOptions */
 
 /**
  * FUNCTIONS

@@ -1,7 +1,10 @@
+
+declare const __VERSION__: string;
+
 /**
  * INTERFACES
  */
-export type CharacterWeight = {
+ export type CharacterWeight = {
 	uppercase: number
 	lowercase: number
 	numbers: number
