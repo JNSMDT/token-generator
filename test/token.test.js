@@ -3,7 +3,7 @@ import { test, describe, expect } from 'vitest';
 import { generatePassword } from '$lib/functions/token.js';
 
 describe.concurrent('Test password generator', () => {
-	test.each([1, 5, 10, 100, 200])('password length option', (length) => {
+	test.each([1, 5, 10, 100, 200, 1000])('password length option', (length) => {
 		const password = generatePassword(length);
 
 		expect(password.length).toBe(length);
