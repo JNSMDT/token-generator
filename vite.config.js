@@ -7,7 +7,8 @@ const config = {
 	test: {
 		globals: true,
 		include: ['test/**/*.{test,spec}.js'],
-		setupFiles: ['test/setup.js']
+		setupFiles: ['test/setup.js'],
+		reporters: 'verbose'
 	}
 };
 
