@@ -21,3 +21,5 @@ export type GeneratePWOptions = {
 	customSpecialCharsType?: CustomSpecialCharsType
 	weight?: CharacterWeight
 }
+
+export type ModalOptions = ['length','customSpecial'?]

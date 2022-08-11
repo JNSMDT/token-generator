@@ -1,4 +1,3 @@
-import { base64, base64url } from 'rfc4648';
 /**
  * CONSTANTS
  */
@@ -151,13 +150,13 @@ export function syntaxHighlight(password) {
 /**
  * generate a base64 token based on the generated password
  * @param {number} length the max length of the token
- * @param {boolean} urlSafeToken option to make the token url save
  * @returns {string} b64 token string
  */
-export function generateBase64Token(length, urlSafeToken = false) {
-	const UInt8Array = crypto.getRandomValues(new Uint8Array(length));
-	const b64String = urlSafeToken ? base64url.stringify(UInt8Array) : base64.stringify(UInt8Array);
-	const slicedB64String = b64String.slice(0, length);
+export function generateToken(length) {
+	const token = generatePassword(length, {
+		customSpecialChars: CHARACTERS_SPECIAL,
+		customSpecialCharsType: 'blacklist'
+	});
 
-	return slicedB64String;
+	return token;
 }

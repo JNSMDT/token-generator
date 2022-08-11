@@ -3,16 +3,19 @@
 	import { createEventDispatcher } from 'svelte';
 	import CancelIcon from '$lib/assets/icons/cross.svg';
 
+	/** @typedef {import("types/internal").ModalOptions} ModalOptions */
+
 	const dispatch = createEventDispatcher();
 
 	export let show = false;
 	export let pwLength;
 	export let customSpecialChars;
 	export let customSpecialCharsType;
+	/** @type {ModalOptions} */
+	export let options;
 	let inputPwLength = pwLength;
 	let inputCustomSpecialChars = customSpecialChars;
 	let inputCustomSpecialCharsType = customSpecialCharsType;
-
 	// Methods
 	function handleSaveSettings() {
 		pwLength = inputPwLength;
@@ -68,38 +71,40 @@
 						bind:value={inputPwLength}
 					/>
 				</div>
-				<div>
-					<input
+				{#if options.includes('customSpecial')}
+					<div>
+						<input
 						id="whitelist"
 						type="radio"
 						bind:group={inputCustomSpecialCharsType}
-						name="customSpecialCharType"
-						value={'whitelist'}
-					/>
-					<label class="pr-4 checked:text-white" for="whitelist"> Whitelist </label>
-					<input
-						id="blacklist"
-						type="radio"
-						bind:group={inputCustomSpecialCharsType}
-						name="customSpecialCharType"
-						value={'blacklist'}
-					/>
-					<label class="" for="blacklist"> Blacklist </label>
-				</div>
-				<div class="mb-8">
-					<label
-						for="customCharactersInput"
-						class="px-2 mb-1 block text-sm font-medium text-gray-700"
-						>Custom Characters (only special Character)</label
-					>
-					<input
-						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
-						name="customCharactersInput"
-						type="text"
-						id="customCharactersInput"
-						bind:value={inputCustomSpecialChars}
-					/>
-				</div>
+							name="customSpecialCharType"
+							value={'whitelist'}
+						/>
+						<label class="pr-4 checked:text-white" for="whitelist"> Whitelist </label>
+						<input
+							id="blacklist"
+							type="radio"
+							bind:group={inputCustomSpecialCharsType}
+							name="customSpecialCharType"
+							value={'blacklist'}
+						/>
+						<label class="" for="blacklist"> Blacklist </label>
+					</div>
+					<div class="mb-8">
+						<label
+							for="customCharactersInput"
+							class="px-2 mb-1 block text-sm font-medium text-gray-700"
+							>Custom Characters (only special Character)</label
+						>
+						<input
+							class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
+							name="customCharactersInput"
+							type="text"
+							id="customCharactersInput"
+							bind:value={inputCustomSpecialChars}
+						/>
+					</div>
+				{/if}
 
 				<button class="absolute top-4 right-4" on:click={closeModal}>
 					<i class="block w-5 sm:w-6">

@@ -9,12 +9,13 @@
 	import {
 		generatePassword,
 		syntaxHighlight,
-		generateBase64Token,
+		generateToken,
 		saveToSessionStorage
 	} from '$lib/functions/token';
 
 /** @typedef {import("types/internal").CustomSpecialChars} CustomSpecialChars */
 /** @typedef {import("types/internal").CustomSpecialCharsType} CustomSpecialCharsType */
+/** @typedef {import("types/internal").ModalOptions} ModalOptions */
 
 	// Import Types
 	import { dev } from '$app/env';
@@ -34,16 +35,15 @@
 	let customSpecialChars = '';
 	/** @type {CustomSpecialCharsType} */
 	let customSpecialCharsType = 'whitelist';
+	/** @type {ModalOptions} */
+	let availableOptions = ['length', 'customSpecial'];
 	let tokenType = 'password';
 	function getToken() {
 		switch (tokenType) {
-			case 'b64Token':
-				password = generateBase64Token(pwLength);
+			case 'token':
+				password = generateToken(pwLength);
 				break;
 
-			case 'b64URLToken':
-				password = generateBase64Token(pwLength, true);
-				break;
 			default:
 				password = generatePassword(pwLength, {
 					customSpecialChars,
@@ -59,7 +59,8 @@
 		getToken();
 	});
 
-	function regeneratePassword() {
+	function onRadioChange() {
+		availableOptions = tokenType === 'token' ? ['length'] : ['length', 'customSpecial'];
 		getToken();
 	}
 
@@ -92,23 +93,15 @@
 				groupName="tokenTypes"
 				value="password"
 				label="Password"
-				changeFunction={regeneratePassword}
+				changeFunction={onRadioChange}
 			/>
 			<RadioButton
-				id="b64Radio"
+				id="tokenRadio"
 				bind:group={tokenType}
 				groupName="tokenTypes"
-				value="b64Token"
-				label="Base64 Token"
-				changeFunction={regeneratePassword}
-			/>
-			<RadioButton
-				id="b64URLRadio"
-				bind:group={tokenType}
-				groupName="tokenTypes"
-				value="b64URLToken"
-				label="Base64 URL Token"
-				changeFunction={regeneratePassword}
+				value="token"
+				label="Token"
+				changeFunction={onRadioChange}
 			/>
 		</div>
 		<h2
@@ -138,7 +131,7 @@
 		>
 			{buttonText}</button
 		>
-		<button on:click={regeneratePassword} class="bg-slate-100 p-2 rounded-md hover:bg-slate-300">
+		<button on:click={onRadioChange} class="bg-slate-100 p-2 rounded-md hover:bg-slate-300">
 			<i class="block w-5 sm:w-6">
 				<SyncIcon />
 			</i>
@@ -166,10 +159,11 @@
 		<a class="hover:text-sky-500" href="mailto:hi@jnschmdt.dev">© Jan Schmidt</a>
 	</div>
 	<Modal
-		on:regeneratePassword={regeneratePassword}
+		on:regeneratePassword={onRadioChange}
 		bind:show={modalShow}
 		bind:pwLength
 		bind:customSpecialChars
 		bind:customSpecialCharsType
+		options={availableOptions}
 	/>
 </main>
