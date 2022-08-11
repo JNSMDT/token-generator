@@ -8,14 +8,6 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true,
-		"paths": {
-			"$lib":["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$components": ["src/components"],
-			"$components/*": ["src/components/*"],
-			"$assets": ["src/assets"],
-			"$assets/*": ["src/assets/*"]
-		}
+		"strict": true
 	}
 }

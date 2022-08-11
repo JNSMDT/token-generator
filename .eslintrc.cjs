@@ -4,27 +4,20 @@ module.exports = {
 		'airbnb-base',
 		'plugin:unicorn/recommended',
 		'plugin:import/recommended',
-		'plugin:import/typescript',
 		'plugin:jsonc/recommended-with-jsonc',
-		'plugin:svelte/recommended',
-		'plugin:@typescript-eslint/recommended'
+		'plugin:svelte/recommended'
 	],
+	env: { browser: true, node: true },
 	parserOptions: {
-		ecmaVersion: 2020,
+		ecmaVersion: 2021,
 		sourceType: 'module'
 	},
 	plugins: ['unicorn', 'import'],
 	settings: {
-		'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
-		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts', '.tsx']
-		},
+		'import/extensions': ['.js', '.jsx'],
 		'import/resolver': {
-			typescript: {
-				project: './tsconfig.json'
-			},
 			node: {
-				extensions: ['.js', '.jsx', '.ts', '.tsx']
+				extensions: ['.js', '.jsx']
 			}
 		}
 	},
@@ -33,10 +26,8 @@ module.exports = {
 		// tabs
 		'no-tabs': 'off',
 		indent: 'off',
-		'@typescript-eslint/indent': ['error', 'tab', { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 }],
 		// trailing-commas
 		'comma-dangle': ['error', 'never'],
-		'@typescript-eslint/comma-dangle': ['error', 'never'],
 
 		// new lines
 		'padding-line-between-statements': [
@@ -53,13 +44,7 @@ module.exports = {
 		'import/named': 'off',
 		'import/no-mutable-exports': 'error',
 		'import/no-absolute-path': 'off',
-		'import/extensions': ['error', 'ignorePackages', {
-			ts: 'never',
-			tsx: 'never',
-			js: 'never',
-			jsx: 'never',
-			mjs: 'never'
-		}],
+		'import/extensions': 'off',
 
 		// Unicorn
 		// Pass error message when throwing errors
@@ -118,9 +103,6 @@ module.exports = {
 		{
 			files: ['*.svelte'],
 			parser: 'svelte-eslint-parser',
-			parserOptions: {
-				parser: '@typescript-eslint/parser'
-			},
 			env: { browser: true, node: false },
 			rules: {
 				'no-undef': 'off',
@@ -135,17 +117,6 @@ module.exports = {
 				'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 				'svelte/valid-compile': 'off',
 				'import/extensions': 'off'
-			}
-		},
-		{
-			files: ['src/**/*.ts', 'src/**/*.js'],
-			parser: '@typescript-eslint/parser',
-			parserOptions: {
-				project: './tsconfig.json'
-			},
-			env: { browser: true, node: true },
-			rules: {
-				'no-undef': 'off'
 			}
 		},
 		{

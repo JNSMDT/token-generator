@@ -1,40 +1,49 @@
-<script lang="ts">
+<script>
 	import { onMount } from 'svelte';
-	import Modal from '$components/Modal.svelte';
-	import RadioButton from '$components/RadioButton.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import RadioButton from '$lib/components/RadioButton.svelte';
 	// Import Icons
-	import GithubIcon from '$assets/icons/github.svg';
-	import SettingsIcon from '$assets/icons/settings.svg';
-	import SyncIcon from '$assets/icons/sync.svg';
+	import GithubIcon from '$lib/assets/icons/github.svg';
+	import SettingsIcon from '$lib/assets/icons/settings.svg';
+	import SyncIcon from '$lib/assets/icons/sync.svg';
 	import {
 		generatePassword,
 		syntaxHighlight,
-		generateBase64Token,
+		generateToken,
 		saveToSessionStorage
-	} from '$lib/functions/generateTokens';
+	} from '$lib/functions/token';
+
+/** @typedef {import("types/internal").CustomSpecialChars} CustomSpecialChars */
+/** @typedef {import("types/internal").CustomSpecialCharsType} CustomSpecialCharsType */
+/** @typedef {import("types/internal").ModalOptions} ModalOptions */
 
 	// Import Types
-	import type { CustomSpecialChars, CustomSpecialCharsType } from '$lib/functions/generateTokens';
 	import { dev } from '$app/env';
 
 	const title = dev ? '(dev) Webcrypto Token Generator' : 'Webcrypto Token Geenrator';
-	let password: string;
-	let highlightedToken: string;
+	// FIXME: JSDOC for globals
+	// @ts-ignore
+	const packageVersion = __VERSION__;
+	/** @type {string} */
+	let password;
+	/** @type {string} */
+	let highlightedToken;
 	let buttonText = 'Copy Password';
 	let modalShow = false;
 	let pwLength = 30;
-	let customSpecialChars: CustomSpecialChars = '';
-	let customSpecialCharsType: CustomSpecialCharsType = 'whitelist';
+	/** @type {CustomSpecialChars} */
+	let customSpecialChars = '';
+	/** @type {CustomSpecialCharsType} */
+	let customSpecialCharsType = 'whitelist';
+	/** @type {ModalOptions} */
+	let availableOptions = ['length', 'customSpecial'];
 	let tokenType = 'password';
 	function getToken() {
 		switch (tokenType) {
-			case 'b64Token':
-				password = generateBase64Token(pwLength);
+			case 'token':
+				password = generateToken(pwLength);
 				break;
 
-			case 'b64URLToken':
-				password = generateBase64Token(pwLength, true);
-				break;
 			default:
 				password = generatePassword(pwLength, {
 					customSpecialChars,
@@ -50,7 +59,8 @@
 		getToken();
 	});
 
-	function regeneratePassword() {
+	function onRadioChange() {
+		availableOptions = tokenType === 'token' ? ['length'] : ['length', 'customSpecial'];
 		getToken();
 	}
 
@@ -83,23 +93,15 @@
 				groupName="tokenTypes"
 				value="password"
 				label="Password"
-				changeFunction={regeneratePassword}
+				changeFunction={onRadioChange}
 			/>
 			<RadioButton
-				id="b64Radio"
+				id="tokenRadio"
 				bind:group={tokenType}
 				groupName="tokenTypes"
-				value="b64Token"
-				label="Base64 Token"
-				changeFunction={regeneratePassword}
-			/>
-			<RadioButton
-				id="b64URLRadio"
-				bind:group={tokenType}
-				groupName="tokenTypes"
-				value="b64URLToken"
-				label="Base64 URL Token"
-				changeFunction={regeneratePassword}
+				value="token"
+				label="Token"
+				changeFunction={onRadioChange}
 			/>
 		</div>
 		<h2
@@ -129,7 +131,7 @@
 		>
 			{buttonText}</button
 		>
-		<button on:click={regeneratePassword} class="bg-slate-100 p-2 rounded-md hover:bg-slate-300">
+		<button on:click={onRadioChange} class="bg-slate-100 p-2 rounded-md hover:bg-slate-300">
 			<i class="block w-5 sm:w-6">
 				<SyncIcon />
 			</i>
@@ -145,7 +147,8 @@
 		</button>
 	</div>
 	<div class="flex absolute bottom-2 right-6 items-center gap-2 font-bold text-sm text-sky-400">
-		<p>v{__VERSION__}</p>
+
+		<p>v{packageVersion}</p>
 		|
 		<a href="https://github.com/angertitan/cryptosubtle-pw-generator">
 			<i class="block w-5 fill-slate-50/50 hover:fill-slate-50">
@@ -156,10 +159,11 @@
 		<a class="hover:text-sky-500" href="mailto:hi@jnschmdt.dev">© Jan Schmidt</a>
 	</div>
 	<Modal
-		on:regeneratePassword={regeneratePassword}
+		on:regeneratePassword={onRadioChange}
 		bind:show={modalShow}
 		bind:pwLength
 		bind:customSpecialChars
 		bind:customSpecialCharsType
+		options={availableOptions}
 	/>
 </main>

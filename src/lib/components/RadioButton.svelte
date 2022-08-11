@@ -1,10 +1,16 @@
-<script lang='ts'>
-	export let id:string;
-	export let group:string;
-	export let changeFunction:() => void;
-	export let label: string;
-	export let groupName: string;
-	export let value: string = label;
+<script>
+	/** @type {string} */
+	export let id;
+	/** @type {string} */
+	export let group;
+	/** @type {() => void} */
+	export let changeFunction;
+		/** @type {string} */
+	export let label;
+		/** @type {string} */
+	export let groupName;
+		/** @type {string} */
+	export let value = label;
 </script>
 
 <div class={`radio-btn-${id}`}>
