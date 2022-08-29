@@ -18,11 +18,9 @@
 /** @typedef {import("types/internal").ModalOptions} ModalOptions */
 
 	// Import Types
-	import { dev } from '$app/env';
+	import { dev } from '$app/environment';
 
 	const title = dev ? '(dev) Webcrypto Token Generator' : 'Webcrypto Token Geenrator';
-	// FIXME: JSDOC for globals
-	// @ts-ignore
 	const packageVersion = __VERSION__;
 	/** @type {string} */
 	let password;

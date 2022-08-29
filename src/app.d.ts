@@ -8,3 +8,5 @@ declare namespace App {
 	// interface Session {}
 	// interface Stuff {}
 }
+
+declare const __VERSION__: string
