@@ -11,11 +11,11 @@
 	<p>v{packageVersion}</p>
 	|
 	{/if}
-	<a href="https://github.com/angertitan/cryptosubtle-pw-generator">
+	<a href="https://github.com/angertitan/webcrypto-token-gen">
 		<i class="block w-5 fill-slate-50/50 hover:fill-slate-50">
 			<GithubIcon />
 		</i>
 	</a>
 	|
-	<a class="hover:text-sky-500" href="mailto:hi@jnschmdt.dev">© Jan Schmidt</a>
+	<a class="hover:text-sky-500" href="mailto:hi@jnsmdt.dev">© Jan Schmidt</a>
 </div>
