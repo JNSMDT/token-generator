@@ -1,15 +1,12 @@
 <script>
 	import GithubIcon from '$lib/assets/icons/github.svg?component';
-
-	const packageVersion = __VERSION__; // injected on build
-
+	import { version as appVersion } from '$app/environment';
 </script>
 
 <div class="flex absolute bottom-2 right-6 items-center gap-2 font-bold text-sm text-sky-400">
-	{#if packageVersion}
-
-	<p>v{packageVersion}</p>
-	|
+	{#if appVersion}
+		<p>v{appVersion}</p>
+		|
 	{/if}
 	<a href="https://github.com/angertitan/webcrypto-token-gen">
 		<i class="block w-5 fill-slate-50/50 hover:fill-slate-50">
