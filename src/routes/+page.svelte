@@ -13,14 +13,14 @@
 		saveToSessionStorage
 	} from '$lib/functions/token';
 
-/** @typedef {import("types/internal").CustomSpecialChars} CustomSpecialChars */
-/** @typedef {import("types/internal").CustomSpecialCharsType} CustomSpecialCharsType */
-/** @typedef {import("types/internal").ModalOptions} ModalOptions */
+	/** @typedef {import("types/internal").CustomSpecialChars} CustomSpecialChars */
+	/** @typedef {import("types/internal").CustomSpecialCharsType} CustomSpecialCharsType */
+	/** @typedef {import("types/internal").ModalOptions} ModalOptions */
 
 	// Import Types
 	import { dev } from '$app/environment';
 
-	const title = dev ? '(dev) Webcrypto Token Generator' : 'Webcrypto Token Generator';
+	const title = dev ? '(dev) Token Generator' : 'Token Generator';
 	/** @type {string} */
 	let password;
 	/** @type {string} */
@@ -37,16 +37,18 @@
 	let tokenType = 'password';
 	function getToken() {
 		switch (tokenType) {
-			case 'token':
-				password = generateToken(pwLength);
-				break;
+		case 'token': {
+			password = generateToken(pwLength);
+			break;
+		}
 
-			default:
-				password = generatePassword(pwLength, {
-					customSpecialChars,
-					customSpecialCharsType
-				});
-				break;
+		default: {
+			password = generatePassword(pwLength, {
+				customSpecialChars,
+				customSpecialCharsType
+			});
+			break;
+		}
 		}
 
 		highlightedToken = syntaxHighlight(password);
@@ -78,9 +80,9 @@
 <svelte:head>
 	<title>{title}</title>
 </svelte:head>
-<main class="bg-sky-300 px-4 py-[10vh] flex flex-col justify-evenly items-center h-screen">
+<main class="bg-sky-300 px-4 py-[10vh] flex flex-col justify-evenly items-center h-sc">
 	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">
-		WebCrypto Token Generator 🔐
+		{title} 🔐
 	</h1>
 	<div class="flex flex-col gap-10">
 		<div class="flex justify-center mx-auto gap-[10%]">
