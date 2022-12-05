@@ -25,7 +25,7 @@ module.exports = {
 		'max-len': 'off',
 		// tabs
 		'no-tabs': 'off',
-		indent: 'off',
+		indent: ['error', 'tab'],
 		// trailing-commas
 		'comma-dangle': ['error', 'never'],
 
@@ -45,6 +45,7 @@ module.exports = {
 		'import/no-mutable-exports': 'error',
 		'import/no-absolute-path': 'off',
 		'import/extensions': 'off',
+		'import/prefer-default-export': 'off',
 
 		// Unicorn
 		// Pass error message when throwing errors
