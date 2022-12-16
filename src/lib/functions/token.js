@@ -63,10 +63,7 @@ function generateCharacterString(customSpecialChars = '', customSpecialCharsType
 	const allowedSpecialCharsLength = allowedSpecialChars.length === 0 ? 1 : allowedSpecialChars.length;
 	const allowedSpecialCharsRepeat = weight.special * (CHARACTERS_SPECIAL.length / allowedSpecialCharsLength);
 	const specialWeightedString = allowedSpecialChars.repeat(allowedSpecialCharsRepeat);
-	const weightedCharsString = uppercaseWeightedString
-		+ lowercaseWeightedString
-		+ numbersWeightedString
-		+ specialWeightedString;
+	const weightedCharsString = uppercaseWeightedString + lowercaseWeightedString + numbersWeightedString + specialWeightedString;
 
 	return weightedCharsString;
 }

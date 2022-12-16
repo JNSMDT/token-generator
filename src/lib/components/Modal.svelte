@@ -60,9 +60,9 @@
 
 			<div class="flex flex-col text-center">
 				<div class="mb-16">
-					<label for="pwLength" class="px-2 mb-1 block text-sm font-medium text-gray-700"
-						>Length</label
-					>
+					<label for="pwLength" class="px-2 mb-1 block text-sm font-medium text-gray-700">
+						Length
+					</label>
 					<input
 						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
 						name="pwLength"
@@ -74,9 +74,9 @@
 				{#if options.includes('customSpecial')}
 					<div>
 						<input
-						id="whitelist"
-						type="radio"
-						bind:group={inputCustomSpecialCharsType}
+							id="whitelist"
+							type="radio"
+							bind:group={inputCustomSpecialCharsType}
 							name="customSpecialCharType"
 							value={'whitelist'}
 						/>
@@ -94,7 +94,8 @@
 						<label
 							for="customCharactersInput"
 							class="px-2 mb-1 block text-sm font-medium text-gray-700"
-							>Custom Characters (only special Character)</label
+						>
+							Custom Characters (only special Character)</label
 						>
 						<input
 							class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"

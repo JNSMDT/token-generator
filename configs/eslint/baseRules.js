@@ -1,10 +1,10 @@
 export default {
 	rules: {
-			// (a) => a not a => a
-			'arrow-parens': [
-				'error',
-				'always'
-			],
+		// (a) => a not a => a
+		'arrow-parens': [
+			'error',
+			'always'
+		],
 		// } else { not }\n else {
 		'brace-style': [
 			'error',
@@ -30,10 +30,6 @@ export default {
 		'comma-style': [
 			'error',
 			'last'
-		],
-		// if (a) { a++ } not if (a) a++
-		curly: [
-			'error'
 		],
 		// allow async-await
 		'generator-star-spacing': [

@@ -15,8 +15,6 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"eslint-define-config": "^1.12.0",
-		"globals": "^13.18.0",
 		"rfc4648": "^1.5.2"
 	},
 	"devDependencies": {
@@ -37,6 +35,7 @@
 		"eslint-plugin-jsonc": "^2.5.0",
 		"eslint-plugin-svelte": "^2.14.0",
 		"eslint-plugin-unicorn": "^45.0.1",
+		"globals": "^13.18.0",
 		"jsonc-eslint-parser": "^2.1.0",
 		"postcss": "^8.4.19",
 		"postcss-load-config": "^4.0.1",

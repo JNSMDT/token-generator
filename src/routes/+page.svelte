@@ -37,18 +37,18 @@
 	let tokenType = 'password';
 	function getToken() {
 		switch (tokenType) {
-		case 'token': {
-			password = generateToken(pwLength);
-			break;
-		}
+			case 'token': {
+				password = generateToken(pwLength);
+				break;
+			}
 
-		default: {
-			password = generatePassword(pwLength, {
-				customSpecialChars,
-				customSpecialCharsType
-			});
-			break;
-		}
+			default: {
+				password = generatePassword(pwLength, {
+					customSpecialChars,
+					customSpecialCharsType
+				});
+				break;
+			}
 		}
 
 		highlightedToken = syntaxHighlight(password);
@@ -75,6 +75,8 @@
 		saveToSessionStorage(password);
 		await changeButtonText();
 	}
+
+/* eslint-disable svelte/no-at-html-tags */
 </script>
 
 <svelte:head>
@@ -106,7 +108,6 @@
 		<h2
 			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
 		>
-			<!-- eslint-disable-next-line -->
 			{@html highlightedToken}
 		</h2>
 	</div>
@@ -115,18 +116,18 @@
 		<button
 			on:click={copyToClipboard}
 			class="
-			text-sm
-			sm:text-base
-			rounded-md w-52
-			sm:w-60
-			text-slate-800
-			bg-sky-400
-			border-2
-			border-sky-500/25
-			py-2 px-2
-			sm:py-3 sm:px-6
-			font-bold
-			hover:text-white"
+				text-sm
+				sm:text-base
+				rounded-md w-52
+				sm:w-60
+				text-slate-800
+				bg-sky-400
+				border-2
+				border-sky-500/25
+				py-2 px-2
+				sm:py-3 sm:px-6
+				font-bold
+				hover:text-white"
 		>
 			{buttonText}</button
 		>
@@ -140,9 +141,9 @@
 				modalShow = true;
 			}}
 			class="bg-slate-100 p-2 rounded-md hover:bg-slate-300"
-			><i class="block w-5 sm:w-6">
-				<SettingsIcon />
-			</i>
+		><i class="block w-5 sm:w-6">
+			<SettingsIcon />
+		</i>
 		</button>
 	</div>
 	<Signature />
