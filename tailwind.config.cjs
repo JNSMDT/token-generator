@@ -7,8 +7,7 @@ module.exports = {
 		height: (theme) => ({
 			auto: 'auto',
 			...theme('spacing'),
-			full: '100%',
-			screen: 'calc(var(--vh) * 100)'
+			full: '100%'
 		}),
 		extend: {},
 		fontFamily: {
