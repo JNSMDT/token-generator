@@ -38,6 +38,7 @@ export default [
 				...globals.browser
 			}
 		},
+		// TODO: Svelte rules need some finetuning
 		rules: {
 			...sveltePlugin.configs.base.rules,
 			...sveltePlugin.configs.recommended.rules,
