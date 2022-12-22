@@ -28,12 +28,17 @@
 	let buttonText = 'Copy Password';
 	let modalShow = false;
 	let pwLength = 30;
+
 	/** @type {CustomSpecialChars} */
 	let customSpecialChars = '';
+
 	/** @type {CustomSpecialCharsType} */
 	let customSpecialCharsType = 'whitelist';
+
 	/** @type {ModalOptions} */
 	let availableOptions = ['length', 'customSpecial'];
+
+	/** @type {   'password' | 'token'} */
 	let tokenType = 'password';
 	function getToken() {
 		switch (tokenType) {
@@ -105,8 +110,7 @@
 				bind:group={tokenType}
 			/>
 		</div>
-		<h2
-			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
+		<h2 class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
 		>
 			{@html highlightedToken}
 		</h2>
