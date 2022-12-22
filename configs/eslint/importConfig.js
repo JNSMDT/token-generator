@@ -1,6 +1,6 @@
 import importPlugin from 'eslint-plugin-import';
 
-export default {
+export const baseImportConfig = {
 	plugins: {
 		import: importPlugin
 	},
@@ -14,3 +14,5 @@ export default {
 		'import/extensions': 'off'
 	}
 };
+
+export default [baseImportConfig];

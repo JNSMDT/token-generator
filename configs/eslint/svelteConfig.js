@@ -7,7 +7,7 @@ import sveltePlugin from 'eslint-plugin-svelte';
 import svelteParser from 'svelte-eslint-parser';
 
 
-export default {
+export const baseSvelteConfig = {
 	files: ['**/*.svelte'],
 	plugins: {
 		svelte: sveltePlugin
@@ -19,7 +19,7 @@ export default {
 		}
 	},
 	rules: {
-		...sveltePlugin.configs.base.overrides.rules,
+		...sveltePlugin.configs.base.overrides[0].rules,
 		...sveltePlugin.configs.recommended.rules,
 		indent: 'off',
 		'svelte/indent': ['error', { indent: 'tab', alignAttributesVertically: true }],
@@ -149,3 +149,5 @@ export default {
 		'import/extensions': 'off'
 	}
 };
+
+export default [baseSvelteConfig];

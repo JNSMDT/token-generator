@@ -1,22 +1,24 @@
 import globals from 'globals';
 
-
 // configs
-import svelteConfig from './configs/eslint/svelteConfig.js';
-import jsonConfigs from './configs/eslint/jsonConfigs.js';
-import unicornConfig from './configs/eslint/unicornConfig.js';
+import baseConfig from './configs/eslint/baseConfig.js';
 import importConfig from './configs/eslint/importConfig.js';
-
-// Rules
-import baseRules from './configs/eslint/baseRules.js';
+// import jsdocConfig from './configs/eslint/jsdocConfig.js';
+import jsonConfigs from './configs/eslint/jsonConfig.js';
+import svelteConfig from './configs/eslint/svelteConfig.js';
+import unicornConfig from './configs/eslint/unicornConfig.js';
 
 
 export default [
+	// build in config
 	'eslint:recommended',
-	// jsdoc.configs.recommended,
-	baseRules,
-	unicornConfig,
-	importConfig,
+	// global configs
+	...baseConfig,
+	...importConfig,
+	...unicornConfig,
+	...jsonConfigs,
+	// ...jsdocConfig,
+	// file specific configs
 	{
 		files: ['**/*.js', '**/*.mjs'],
 		languageOptions: {
@@ -26,6 +28,5 @@ export default [
 			}
 		}
 	},
-	svelteConfig,
-	...jsonConfigs
+	...svelteConfig
 ];
