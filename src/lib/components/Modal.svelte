@@ -60,13 +60,13 @@
 
 			<div class="flex flex-col text-center">
 				<div class="mb-16">
-					<label for="pwLength" class="px-2 mb-1 block text-sm font-medium text-gray-700">
+					<label class="px-2 mb-1 block text-sm font-medium text-gray-700" for="pwLength">
 						Length
 					</label>
 					<input
-						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
-						name="pwLength"
 						id="pwlength"
+						name="pwLength"
+						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
 						type="number"
 						bind:value={inputPwLength}
 					/>
@@ -75,34 +75,34 @@
 					<div>
 						<input
 							id="whitelist"
-							type="radio"
-							bind:group={inputCustomSpecialCharsType}
 							name="customSpecialCharType"
-							value={'whitelist'}
+							type="radio"
+							value="whitelist"
+							bind:group={inputCustomSpecialCharsType}
 						/>
 						<label class="pr-4 checked:text-white" for="whitelist"> Whitelist </label>
 						<input
 							id="blacklist"
-							type="radio"
-							bind:group={inputCustomSpecialCharsType}
 							name="customSpecialCharType"
-							value={'blacklist'}
+							type="radio"
+							value="blacklist"
+							bind:group={inputCustomSpecialCharsType}
 						/>
 						<label class="" for="blacklist"> Blacklist </label>
 					</div>
 					<div class="mb-8">
 						<label
-							for="customCharactersInput"
 							class="px-2 mb-1 block text-sm font-medium text-gray-700"
+							for="customCharactersInput"
 						>
 							Custom Characters (only special Character)</label
 						>
 						<input
-							class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
-							name="customCharactersInput"
-							type="text"
 							id="customCharactersInput"
-							bind:value={inputCustomSpecialChars}
+							name="customCharactersInput"
+							class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
+							type="text"
+							bind:value={inputCustomSpecialChars}  
 						/>
 					</div>
 				{/if}

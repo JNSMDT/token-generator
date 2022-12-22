@@ -62,4 +62,4 @@ export const packageJsonConfig = {
 	}
 };
 
-export default [generalJsonConfig, packageJsonConfig ];
+export default [generalJsonConfig, packageJsonConfig];

@@ -90,19 +90,19 @@
 		<div class="flex justify-center mx-auto gap-[10%]">
 			<RadioButton
 				id="pwRadio"
-				bind:group={tokenType}
-				groupName="tokenTypes"
-				value="password"
-				label="Password"
 				changeFunction={onRadioChange}
+				groupName="tokenTypes"
+				label="Password"
+				value="password"
+				bind:group={tokenType}
 			/>
 			<RadioButton
 				id="tokenRadio"
-				bind:group={tokenType}
-				groupName="tokenTypes"
-				value="token"
-				label="Token"
 				changeFunction={onRadioChange}
+				groupName="tokenTypes"
+				label="Token"
+				value="token"
+				bind:group={tokenType}
 			/>
 		</div>
 		<h2
@@ -114,7 +114,6 @@
 
 	<div class="flex gap-5 justify-center items-center">
 		<button
-			on:click={copyToClipboard}
 			class="
 				text-sm
 				sm:text-base
@@ -128,19 +127,20 @@
 				sm:py-3 sm:px-6
 				font-bold
 				hover:text-white"
+			on:click={copyToClipboard}
 		>
 			{buttonText}</button
 		>
-		<button on:click={onRadioChange} class="bg-slate-100 p-2 rounded-md hover:bg-slate-300">
+		<button class="bg-slate-100 p-2 rounded-md hover:bg-slate-300" on:click={onRadioChange}>
 			<i class="block w-5 sm:w-6">
 				<SyncIcon />
 			</i>
 		</button>
 		<button
+			class="bg-slate-100 p-2 rounded-md hover:bg-slate-300"
 			on:click={() => {
 				modalShow = true;
 			}}
-			class="bg-slate-100 p-2 rounded-md hover:bg-slate-300"
 		><i class="block w-5 sm:w-6">
 			<SettingsIcon />
 		</i>
@@ -148,11 +148,11 @@
 	</div>
 	<Signature />
 	<Modal
+		options={availableOptions}
 		on:regeneratePassword={onRadioChange}
 		bind:show={modalShow}
 		bind:pwLength
 		bind:customSpecialChars
 		bind:customSpecialCharsType
-		options={availableOptions}
 	/>
 </main>

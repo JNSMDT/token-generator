@@ -1,4 +1,4 @@
 <script>
 	import '../app.css';
 
-</script><slot></slot>
+</script><slot />
