@@ -5,6 +5,7 @@
 	import Signature from '$lib/components/Signature.svelte';
 	// Import Icons
 	import SettingsIcon from '$lib/assets/icons/settings.svg?component';
+	import LockIcon from '$lib/assets/icons/lock-lucide.svg?component';
 	import SyncIcon from '$lib/assets/icons/sync.svg?component';
 	import {
 		generatePassword,
@@ -88,9 +89,12 @@
 	<title>{title}</title>
 </svelte:head>
 <main class="bg-sky-300 px-4 py-[10vh] flex flex-col justify-evenly items-center min-h-screen">
-	<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">
-		{title} 🔐
-	</h1>
+	<div class="flex">
+		<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">
+			{title}
+		</h1>
+		<LockIcon class="fill-green-400" />
+	</div>
 	<div class="flex flex-col gap-10">
 		<div class="flex justify-center mx-auto gap-[10%]">
 			<RadioButton
