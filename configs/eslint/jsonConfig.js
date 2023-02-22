@@ -2,7 +2,7 @@ import jsonParser from 'jsonc-eslint-parser';
 import jsonPlugin from 'eslint-plugin-jsonc';
 
 
-export const generalJsonConfig = {
+export const baseJsonConfig = {
 	files: ['**/*.json', '**/*.json5', '**/*.jsonc'],
 	plugins: {
 		jsonc: jsonPlugin
@@ -62,4 +62,4 @@ export const packageJsonConfig = {
 	}
 };
 
-export default [generalJsonConfig, packageJsonConfig ];
+export default [baseJsonConfig, packageJsonConfig];

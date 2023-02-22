@@ -1,6 +1,6 @@
 import unicornPlugin from 'eslint-plugin-unicorn';
 
-export default {
+export const baseUnicornConfig = {
 	plugins: {
 		unicorn: unicornPlugin
 	},
@@ -59,3 +59,5 @@ export default {
 		]
 	}
 };
+
+export default [baseUnicornConfig];

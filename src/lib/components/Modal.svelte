@@ -53,20 +53,19 @@
 		data-close
 		transition:fade={{ duration: 150 }}
 	>
-		<div
-			class="rounded-xl relative bg-white w-[80%] sm:w-[400px] p-2 sm:p-4 sm:mt-4 sm:mb-4 shadow-md m-auto flex flex-col justify-center"
+		<div class="rounded-xl relative bg-white w-[80%] sm:w-[400px] p-2 sm:p-4 sm:mt-4 sm:mb-4 shadow-md m-auto flex flex-col justify-center"
 		>
 			<h1 class="text-2xl font-bold mb-4">Settings</h1>
 
 			<div class="flex flex-col text-center">
 				<div class="mb-16">
-					<label for="pwLength" class="px-2 mb-1 block text-sm font-medium text-gray-700">
+					<label class="px-2 mb-1 block text-sm font-medium text-gray-700" for="pwLength">
 						Length
 					</label>
 					<input
-						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
-						name="pwLength"
 						id="pwlength"
+						name="pwLength"
+						class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
 						type="number"
 						bind:value={inputPwLength}
 					/>
@@ -75,33 +74,33 @@
 					<div>
 						<input
 							id="whitelist"
-							type="radio"
-							bind:group={inputCustomSpecialCharsType}
 							name="customSpecialCharType"
-							value={'whitelist'}
+							type="radio"
+							value="whitelist"
+							bind:group={inputCustomSpecialCharsType}
 						/>
 						<label class="pr-4 checked:text-white" for="whitelist"> Whitelist </label>
 						<input
 							id="blacklist"
-							type="radio"
-							bind:group={inputCustomSpecialCharsType}
 							name="customSpecialCharType"
-							value={'blacklist'}
+							type="radio"
+							value="blacklist"
+							bind:group={inputCustomSpecialCharsType}
 						/>
 						<label class="" for="blacklist"> Blacklist </label>
 					</div>
 					<div class="mb-8">
 						<label
-							for="customCharactersInput"
 							class="px-2 mb-1 block text-sm font-medium text-gray-700"
+							for="customCharactersInput"
 						>
 							Custom Characters (only special Character)</label
 						>
 						<input
-							class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
-							name="customCharactersInput"
-							type="text"
 							id="customCharactersInput"
+							name="customCharactersInput"
+							class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
+							type="text"
 							bind:value={inputCustomSpecialChars}
 						/>
 					</div>

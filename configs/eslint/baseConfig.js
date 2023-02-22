@@ -1,4 +1,4 @@
-export default {
+export const baseConfig = {
 	rules: {
 		// (a) => a not a => a
 		'arrow-parens': [
@@ -159,3 +159,5 @@ export default {
 		]
 	}
 };
+
+export default [baseConfig];
