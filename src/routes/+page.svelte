@@ -93,7 +93,7 @@
 		<h1 class="xl:text-6xl md:text-4xl text-3xl font-bold text-center">
 			{title}
 		</h1>
-		<LockIcon class="fill-green-400" />
+		<LockIcon class="stroke-slate-800" />
 	</div>
 	<div class="flex flex-col gap-10">
 		<div class="flex justify-center mx-auto gap-[10%]">
