@@ -9,8 +9,6 @@ declare namespace App {
 	// interface Stuff {}
 }
 
-declare const __VERSION__: string
-
 // sveltekit-svg types
 declare module '*.svg?component' {
   const content: ConstructorOfATypedSvelteComponent
