@@ -1,12 +1,12 @@
 import globals from 'globals';
 
 // configs
-import baseConfig from './configs/eslint/baseConfig.js';
-import importConfig from './configs/eslint/importConfig.js';
+import baseConfig from './eslint/baseConfig.js';
+import importConfig from './eslint/importConfig.js';
 // import jsdocConfig from './configs/eslint/jsdocConfig.js';
-import jsonConfigs from './configs/eslint/jsonConfig.js';
-import svelteConfig from './configs/eslint/svelteConfig.js';
-import unicornConfig from './configs/eslint/unicornConfig.js';
+import jsonConfigs from './eslint/jsonConfig.js';
+import svelteConfig from './eslint/svelteConfig.js';
+import unicornConfig from './eslint/unicornConfig.js';
 
 
 export default [
