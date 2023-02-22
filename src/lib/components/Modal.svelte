@@ -53,8 +53,7 @@
 		data-close
 		transition:fade={{ duration: 150 }}
 	>
-		<div
-			class="rounded-xl relative bg-white w-[80%] sm:w-[400px] p-2 sm:p-4 sm:mt-4 sm:mb-4 shadow-md m-auto flex flex-col justify-center"
+		<div class="rounded-xl relative bg-white w-[80%] sm:w-[400px] p-2 sm:p-4 sm:mt-4 sm:mb-4 shadow-md m-auto flex flex-col justify-center"
 		>
 			<h1 class="text-2xl font-bold mb-4">Settings</h1>
 
@@ -102,7 +101,7 @@
 							name="customCharactersInput"
 							class="focus:ring-sky-300 focus:border-sky-300 py-2 px-2 w-full border-2 border-gray-300 bg-transparent sm:text-sm rounded-md"
 							type="text"
-							bind:value={inputCustomSpecialChars}  
+							bind:value={inputCustomSpecialChars}
 						/>
 					</div>
 				{/if}
