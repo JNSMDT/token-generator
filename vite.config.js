@@ -9,7 +9,7 @@ const config = {
 
 	test: {
 		globals: true,
-		include: ['test/**/*.{test,spec}.js'],
+		include: ['test/**/*.{test,spec}.ts'],
 		setupFiles: ['test/setup.js'],
 		reporters: 'verbose'
 	}
