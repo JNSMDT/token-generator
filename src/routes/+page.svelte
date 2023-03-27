@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import RadioButton from '$lib/components/RadioButton.svelte';
@@ -14,33 +14,28 @@
 		saveToSessionStorage
 	} from '$lib/functions/token';
 
-	/** @typedef {import("types/internal").CustomSpecialChars} CustomSpecialChars */
-	/** @typedef {import("types/internal").CustomSpecialCharsType} CustomSpecialCharsType */
-	/** @typedef {import("types/internal").ModalOptions} ModalOptions */
-
 	// Import Types
 	import { dev } from '$app/environment';
+	import type { CustomSpecialChars, CustomSpecialCharsType, ModalOptions } from '$types/internal';
+
+	type TokenType = 'password' | 'token';
 
 	const title = dev ? '(dev) Token Generator' : 'Token Generator';
 	/** @type {string} */
-	let password;
+	let password: string;
 	/** @type {string} */
-	let highlightedToken;
+	let highlightedToken: string;
 	let buttonText = 'Copy Password';
 	let modalShow = false;
 	let pwLength = 30;
 
-	/** @type {CustomSpecialChars} */
-	let customSpecialChars = '';
+	let customSpecialChars: CustomSpecialChars = '';
 
-	/** @type {CustomSpecialCharsType} */
-	let customSpecialCharsType = 'whitelist';
+	let customSpecialCharsType: CustomSpecialCharsType = 'whitelist';
 
-	/** @type {ModalOptions} */
-	let availableOptions = ['length', 'customSpecial'];
+	let availableOptions: ModalOptions = ['length', 'customSpecial'];
 
-	/** @type {   'password' | 'token'} */
-	let tokenType = 'password';
+	let tokenType: TokenType = 'password';
 	function getToken() {
 		switch (tokenType) {
 			case 'token': {
@@ -82,7 +77,7 @@
 		await changeButtonText();
 	}
 
-/* eslint-disable svelte/no-at-html-tags */
+	/* eslint-disable svelte/no-at-html-tags */
 </script>
 
 <svelte:head>
@@ -114,7 +109,8 @@
 				bind:group={tokenType}
 			/>
 		</div>
-		<h2 class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
+		<h2
+			class="text-xl sm:text-3xl lg:text-4xl font-mono slashed-zero tabular-nums text-md font-bold text-center bg-slate-100 p-3 sm:p-6 rounded-md"
 		>
 			{@html highlightedToken}
 		</h2>
@@ -149,9 +145,9 @@
 			on:click={() => {
 				modalShow = true;
 			}}
-		><i class="block w-5 sm:w-6">
-			<SettingsIcon />
-		</i>
+			><i class="block w-5 sm:w-6">
+				<SettingsIcon />
+			</i>
 		</button>
 	</div>
 	<Signature />

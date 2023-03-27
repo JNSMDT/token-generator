@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url';
 import adapter from '@sveltejs/adapter-cloudflare';
 import preprocess from 'svelte-preprocess';
 
-
 const file = fileURLToPath(new URL('package.json', import.meta.url));
 const json = readFileSync(file, 'utf8');
 const packageJSON = JSON.parse(json);
@@ -20,6 +19,9 @@ const config = {
 		adapter: adapter(),
 		version: {
 			name: packageJSON.version
+		},
+		alias: {
+			$types: './types'
 		}
 	}
 };

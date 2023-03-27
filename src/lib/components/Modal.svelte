@@ -1,9 +1,8 @@
-<script>
+<script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 	import CancelIcon from '$lib/assets/icons/cross.svg?component';
-
-	/** @typedef {import("types/internal").ModalOptions} ModalOptions */
+	import type { ModalOptions } from '$types/internal';
 
 	const dispatch = createEventDispatcher();
 
@@ -11,8 +10,7 @@
 	export let pwLength;
 	export let customSpecialChars;
 	export let customSpecialCharsType;
-	/** @type {ModalOptions} */
-	export let options;
+	export let options: ModalOptions;
 	let inputPwLength = pwLength;
 	let inputCustomSpecialChars = customSpecialChars;
 	let inputCustomSpecialCharsType = customSpecialCharsType;
@@ -30,19 +28,13 @@
 		show = false;
 	}
 
-	// Handler
-	/**
-	 *
-	 * @param {KeyboardEvent} event
-	 */
-	function handleKeyPress(event) {
+	function handleKeyPress(event: KeyboardEvent) {
 		if (event.key !== 'ESC') {
 			return;
 		}
 
 		closeModal();
 	}
-
 </script>
 
 <svelte:window on:keyup={handleKeyPress} />
@@ -53,7 +45,8 @@
 		data-close
 		transition:fade={{ duration: 150 }}
 	>
-		<div class="rounded-xl relative bg-white w-[80%] sm:w-[400px] p-2 sm:p-4 sm:mt-4 sm:mb-4 shadow-md m-auto flex flex-col justify-center"
+		<div
+			class="rounded-xl relative bg-white w-[80%] sm:w-[400px] p-2 sm:p-4 sm:mt-4 sm:mb-4 shadow-md m-auto flex flex-col justify-center"
 		>
 			<h1 class="text-2xl font-bold mb-4">Settings</h1>
 

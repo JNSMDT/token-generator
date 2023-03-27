@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import GithubIcon from '$lib/assets/icons/github.svg?component';
 	import { version as appVersion } from '$app/environment';
 </script>
