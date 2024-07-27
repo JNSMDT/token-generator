@@ -71,7 +71,7 @@
 		copyButtonText = 'Copied!';
 		setTimeout(() => {
 			copyButtonText = 'Copy to Clipboard';
-		}, 2000);
+		}, 3000);
 	}
 
 	function saveSettings() {
@@ -111,18 +111,21 @@
 		</div>
 
 		<div class="user-controls flex gap-4 items-center">
-			<button class="copy-button token-button" onclick={ handleCopyButtonClick } type="button">
+			<button class="copy-button token-button"
+				class:animate-copy={ copyButtonText === 'Copied!' }
+				onclick={ handleCopyButtonClick }
+				type="button">
 				{ copyButtonText }
 			</button>
-			<button class="token-button white-button icon-button" onclick={ () => generateNewToken() } type="button">
+			<button class="token-button white-button icon-button sync-button" onclick={ () => generateNewToken() } type="button">
 				<SyncIcon class="stroke-2.5 stroke-slate-800 h-5 w-5" />
 			</button>
 			<button class="token-button white-button icon-button" onclick={ () => showSettings = !showSettings } type="button">
 				<SettingsIcon class="stroke-2.5 stroke-slate-800 h-5 w-5" />
 			</button>
 		</div>
-		<div class="settings bg-sky-50 rounded-2 flex flex-col gap-4 absolute min-w-80 justify-center items-center left-110% p-4"
-			class:invisible={ !showSettings }>
+		<div class="settings bg-sky-50 rounded-2 flex flex-col gap-4 absolute min-w-80 justify-center items-center left-110% transition-200 p-4"
+			class:op-0={ !showSettings }>
 			<h3 class="text-2xl font-bold">Settings</h3>
 			<div class="flex gap-2 justify-center items-center">
 				<label class="text-lg" for="password-length"> Password Length:</label>
@@ -180,4 +183,18 @@
 			--uno: 'min-w-0'
 		}
 	}
+
+	/* Animations */
+	@keyframes Animate-Copy {
+		50% {
+			transform: translateY(-10%);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+	.animate-copy {
+		animation: Animate-Copy 0.5s ease-in-out;
+	}
+
 </style>
