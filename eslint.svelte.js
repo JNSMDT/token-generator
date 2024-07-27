@@ -2,7 +2,10 @@
  * This Config File is based on the Version 2.39.0 of the ESLint Plugin Svelte.
  */
 import pluginSvelte from 'eslint-plugin-svelte';
+import fs from 'node:fs';
 import tsEslint from 'typescript-eslint';
+
+const isUnoCss = fs.existsSync('./unocss.config.ts');
 
 // Possible Errors see https://github.com/sveltejs/eslint-plugin-svelte?tab=readme-ov-file#possible-errors
 const rulesPossibleErrors = {
@@ -50,7 +53,7 @@ const rulesBestPractices = {
 	'svelte/no-reactive-functions': ['error'],
 	'svelte/no-reactive-literals': ['error'],
 	'svelte/no-svelte-internal': ['error'],
-	'svelte/no-unused-class-name': ['error'],
+	'svelte/no-unused-class-name': isUnoCss ? 'off' : ['error'],
 
 	/* 'svelte/no-unused-svelte-ignore' : ['error'], // disabled cause is already covered by recommended */
 	'svelte/no-useless-mustaches': ['error'],
@@ -71,7 +74,17 @@ const rulesStylistic = {
 	'svelte/html-self-closing': ['error', 'always'],
 	'svelte/indent': ['error', { alignAttributesVertically: false, indent: 'tab', switchCase: 1 }],
 	'svelte/max-attributes-per-line': ['error', { multiline: 1, singleline: 3 }],
-	'svelte/mustache-spacing': ['error', { tags: { closingBrace: 'always', openingBrace: 'always' } }],
+	'svelte/mustache-spacing': [
+		'error', {
+			attributesAndProps: 'always',
+			directiveExpressions: 'always',
+			tags: {
+				closingBrace: 'never',
+				openingBrace: 'never',
+			},
+			textExpressions: 'always',
+		},
+	],
 	'svelte/no-extra-reactive-curlies': 'error',
 	'svelte/no-spaces-around-equal-signs-in-attribute': 'error',
 	'svelte/prefer-class-directive': 'error',

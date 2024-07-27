@@ -10,10 +10,6 @@ import stylisticConfig from './eslint.stylistic.js';
 import svelteConfig from './eslint.svelte.js';
 
 export default [
-	eslint.configs.recommended,
-	stylisticConfig,
-	unocss,
-	perfectionistNatural.configs['recommended-natural'],
 	{
 		languageOptions: {
 			ecmaVersion: 2022,
@@ -25,11 +21,11 @@ export default [
 			sourceType: 'module',
 		},
 	},
-	{
-		plugins: {
-			unicorn: pluginUnicorn,
-		},
-	},
+	eslint.configs.recommended,
+	stylisticConfig,
+	unocss,
+	perfectionistNatural.configs['recommended-natural'],
+	pluginUnicorn.configs['flat/recommended'],
 	...tsEslint.configs.recommended,
 
 	...svelteConfig,

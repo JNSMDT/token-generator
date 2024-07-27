@@ -1,0 +1,19 @@
+:root {
+	--base-margin: 1rem;
+	--base-padding: 1rem;
+}
+
+.password {
+	& .uppercase {
+		--uno: "text-slate-900"
+	}
+	& .lowercase {
+		--uno: "text-slate-600"
+	}
+	& .special {
+		--uno: "text-red-500"
+	}
+	& .number {
+		--uno: "text-blue-500"
+	}
+}

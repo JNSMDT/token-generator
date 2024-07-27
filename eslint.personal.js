@@ -16,6 +16,7 @@ export default [
 			],
 			'import/no-unresolved': 'off',
 			'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+			'no-undef': 'off',
 			'no-unused-vars': 'off',
 			'perfectionist/sort-imports': [
 				'error',
@@ -56,7 +57,7 @@ export default [
 						camelCase: true,
 						pascalCase: true,
 					},
-					ignore: ['\\.svelte$'],
+					ignore: [String.raw`\.svelte$`],
 				},
 			],
 			'unicorn/no-null': 'off',
