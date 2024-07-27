@@ -50,8 +50,5 @@
     "vitest": "^2.0.4"
   },
   "type": "module",
-  "description": "",
-  "dependencies": {
-    "@fontsource/ibm-plex-sans": "^5.0.20"
-  }
+  "description": ""
 }
