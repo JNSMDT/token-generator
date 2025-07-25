@@ -1,6 +1,6 @@
 :root {
-	--base-margin: 1rem;
-	--base-padding: 1rem;
+	--margin-devider: 4;
+	--padding-devider: 4;
 }
 
 .password {
