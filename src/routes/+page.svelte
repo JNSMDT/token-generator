@@ -1,87 +1,84 @@
 <script lang="ts">
+import LockIcon from '$lib/assets/icons/lock-lucide.svg?component';
+import SettingsIcon from '$lib/assets/icons/settings.svg?component';
+import SyncIcon from '$lib/assets/icons/sync.svg?component';
+import Signature from '$lib/components/signature.svelte';
+import type { ListType } from '$lib/components/token';
+import { CHARACTERS_SPECIAL, generatePassword as generateToken, syntaxHighlight } from '$lib/components/token';
 
-	import type { ListType } from '$lib/components/token';
+type TokenType = 'password' | 'token';
 
-	import LockIcon from '$lib/assets/icons/lock-lucide.svg?component';
-	import SettingsIcon from '$lib/assets/icons/settings.svg?component';
-	import SyncIcon from '$lib/assets/icons/sync.svg?component';
-	import Signature from '$lib/components/signature.svelte';
-	import { CHARACTERS_SPECIAL, generatePassword as generateToken, syntaxHighlight } from '$lib/components/token';
+let passwordLength = $state(30);
+let generatedToken = $state('');
+let customSpecialChars = $state('');
+let listType: ListType = $state('whitelist');
+let highlightedPassword = $state('');
+let tokenType: TokenType = $state('password');
+let showSettings = $state(false);
+let inputLength = $state(30);
+let inputSpecialChars = $state('');
+let inputListType: ListType = $state('whitelist');
+let copyButtonText = $state('Copy to Clipboard');
 
-	type TokenType = 'password' | 'token';
+$effect(() => {
+	generateNewToken();
+});
 
-	let passwordLength = $state(30);
-	let generatedToken = $state('');
-	let customSpecialChars = $state('');
-	let listType: ListType = $state('whitelist');
-	let highlightedPassword = $state('');
-	let tokenType: TokenType = $state('password');
-	let showSettings = $state(false);
-	let inputLength = $state(30);
-	let inputSpecialChars = $state('');
-	let inputListType: ListType = $state('whitelist');
-	let copyButtonText = $state('Copy to Clipboard');
-
-	$effect(() => {
-		generateNewToken();
+function generateHighlightedPassword() {
+	const newPassword = generateToken(passwordLength, {
+		customSpecialChars,
+		listType,
 	});
 
-	function generateHighlightedPassword() {
-		const newPassword = generateToken(passwordLength, {
-			customSpecialChars,
-			listType,
-		});
+	generatedToken = newPassword;
 
-		generatedToken = newPassword;
+	return syntaxHighlight(newPassword);
+}
 
-		return syntaxHighlight(newPassword);
+function generateHighlightedToken() {
+	const newToken = generateToken(passwordLength, {
+		customSpecialChars: CHARACTERS_SPECIAL,
+		listType: 'blacklist',
+	});
+
+	generatedToken = newToken;
+
+	return syntaxHighlight(newToken);
+}
+
+function generateNewToken() {
+	if (tokenType === 'password') {
+		highlightedPassword = generateHighlightedPassword();
 	}
 
-	function generateHighlightedToken() {
-		const newToken = generateToken(passwordLength, {
-			customSpecialChars: CHARACTERS_SPECIAL,
-			listType: 'blacklist',
-		});
-
-		generatedToken = newToken;
-
-		return syntaxHighlight(newToken);
+	if (tokenType === 'token') {
+		highlightedPassword = generateHighlightedToken();
 	}
+}
 
-	function generateNewToken() {
-		if (tokenType === 'password') {
-			highlightedPassword = generateHighlightedPassword();
-		}
+function handlePasswordButtonClick() {
+	tokenType = 'password';
+}
 
-		if (tokenType === 'token') {
-			highlightedPassword = generateHighlightedToken();
-		}
-	}
+function handleTokenButtonClick() {
+	tokenType = 'token';
+}
 
-	function handlePasswordButtonClick() {
-		tokenType = 'password';
-	}
+function handleCopyButtonClick() {
+	navigator.clipboard.writeText(generatedToken);
+	copyButtonText = 'Copied!';
+	setTimeout(() => {
+		copyButtonText = 'Copy to Clipboard';
+	}, 3000);
+}
 
-	function handleTokenButtonClick() {
-		tokenType = 'token';
-	}
-
-	function handleCopyButtonClick() {
-		navigator.clipboard.writeText(generatedToken);
-		copyButtonText = 'Copied!';
-		setTimeout(() => {
-			copyButtonText = 'Copy to Clipboard';
-		}, 3000);
-	}
-
-	function saveSettings() {
-		passwordLength = inputLength;
-		customSpecialChars = inputSpecialChars;
-		listType = inputListType;
-		generateNewToken();
-		showSettings = false;
-	}
-
+function saveSettings() {
+	passwordLength = inputLength;
+	customSpecialChars = inputSpecialChars;
+	listType = inputListType;
+	generateNewToken();
+	showSettings = false;
+}
 </script>
 
 <svelte:head>

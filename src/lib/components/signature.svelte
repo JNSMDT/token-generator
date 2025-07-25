@@ -1,6 +1,7 @@
 <script lang="ts">
-	import GithubIcon from '$lib/assets/icons/github.svg?component';
-	let appVersion = APP_VERSION;
+import GithubIcon from '$lib/assets/icons/github.svg?component';
+
+let appVersion = APP_VERSION;
 </script>
 
 <div class="text-md text-sky-500 font-bold flex gap-2 absolute items-center bottom-2 right-6">
