@@ -3,8 +3,8 @@ import LockIcon from '$lib/assets/icons/lock-lucide.svg?component';
 import SettingsIcon from '$lib/assets/icons/settings.svg?component';
 import SyncIcon from '$lib/assets/icons/sync.svg?component';
 import Signature from '$lib/components/signature.svelte';
-import type { ListType } from '$lib/components/token';
-import { CHARACTERS_SPECIAL, generatePassword as generateToken, syntaxHighlight } from '$lib/components/token';
+import type { ListType } from '$lib/token/token';
+import { CHARACTERS_SPECIAL, generatePassword as generateToken, syntaxHighlight } from '$lib/token/token';
 
 type TokenType = 'password' | 'token';
 
