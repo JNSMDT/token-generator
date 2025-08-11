@@ -70,7 +70,7 @@ function generateCharacterString(customSpecialChars: CustomSpecialChars = '',
 }
 
 // generates a crypto suitable number between 0-and 1
-function cryptoRand(): number {
+export function cryptoRand(): number {
 	const randomBuffer = new Uint32Array(1);
 
 	crypto.getRandomValues(randomBuffer);
@@ -80,7 +80,7 @@ function cryptoRand(): number {
 }
 
 // generates a random number between max and min
-function getRandomINT(max: number, min = 0): number {
+export function getRandomInt(max: number, min = 0): number {
 	return Math.floor(cryptoRand() * (max - min + 1)) + min;
 }
 
@@ -103,7 +103,7 @@ export function generatePassword(length: number, options = DEFAULT_OPTIONS) {
 		weight);
 	const fixLengthEmptyArray = Array.from({ length });
 	const passwordArray = fixLengthEmptyArray.map(() => {
-		const randINT = getRandomINT(characterString.length - 1);
+		const randINT = getRandomInt(characterString.length - 1);
 
 		return characterString.charAt(randINT);
 	});

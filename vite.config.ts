@@ -34,8 +34,8 @@ export default defineConfig({
 
 	test: {
 		globals: true,
-		include: ['test/**/*.{test,spec}.ts'],
+		include: ['tests/**/{test,spec}.ts'],
 		reporters: 'verbose',
-		setupFiles: ['test/setup.js'],
+		setupFiles: ['tests/setup.ts'],
 	},
 });
