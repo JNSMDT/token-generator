@@ -1,0 +1,12 @@
+services:
+  token-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: token-generator
+    ports:
+      - "${APP_PORT}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
