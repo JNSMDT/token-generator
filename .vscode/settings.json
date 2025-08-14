@@ -1,3 +1,5 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
+	"svelte.plugin.svelte.format.config.printWidth": 120,
+	"svelte.plugin.svelte.format.config.singleQuote": true,
 }
