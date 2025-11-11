@@ -24,7 +24,7 @@
 		generateNewToken();
 	});
 
-	function generateHighlightedPassword() {
+	function generateHighlightedPassword(): string {
 		const newPassword = generateToken(passwordLength, {
 			customSpecialChars,
 			listType,
@@ -35,7 +35,7 @@
 		return syntaxHighlight(newPassword);
 	}
 
-	function generateHighlightedToken() {
+	function generateHighlightedToken(): string {
 		const newToken = generateToken(passwordLength, {
 			customSpecialChars: CHARACTERS_SPECIAL,
 			listType: "blacklist",
@@ -46,7 +46,7 @@
 		return syntaxHighlight(newToken);
 	}
 
-	function generateNewToken() {
+	function generateNewToken(): void {
 		if (tokenType === "password") {
 			highlightedPassword = generateHighlightedPassword();
 		}
@@ -56,15 +56,15 @@
 		}
 	}
 
-	function handlePasswordButtonClick() {
+	function handlePasswordButtonClick(): void {
 		tokenType = "password";
 	}
 
-	function handleTokenButtonClick() {
+	function handleTokenButtonClick(): void {
 		tokenType = "token";
 	}
 
-	function handleCopyButtonClick() {
+	function handleCopyButtonClick(): void {
 		navigator.clipboard.writeText(generatedToken);
 		copyButtonText = "Copied!";
 		setTimeout(() => {
@@ -72,7 +72,7 @@
 		}, 3000);
 	}
 
-	function saveSettings() {
+	function saveSettings(): void {
 		passwordLength = inputLength;
 		customSpecialChars = inputSpecialChars;
 		listType = inputListType;

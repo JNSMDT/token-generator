@@ -3,7 +3,6 @@ export type CharacterWeight = {
 	numbers: number;
 	special: number;
 	uppercase: number;
-
 };
 export type CustomSpecialChars = string;
 export type ListType = 'blacklist' | 'whitelist';
@@ -32,9 +31,11 @@ const DEFAULT_WEIGHT: CharacterWeight = {
 	uppercase: 2,
 };
 
-function generateCharacterString(customSpecialChars: CustomSpecialChars = '',
+function generateCharacterString(
+	customSpecialChars: CustomSpecialChars = '',
 	customSpecialCharsType: ListType = 'whitelist',
-	weight = DEFAULT_WEIGHT): string {
+	weight = DEFAULT_WEIGHT,
+): string {
 	let allowedSpecialChars = CHARACTERS_SPECIAL;
 
 	// skip if customSpecialChars is empty
@@ -44,8 +45,10 @@ function generateCharacterString(customSpecialChars: CustomSpecialChars = '',
 		 * overwriting the potentional given blacklist. This means you can't have a blacklist and a
 		 * whitelist at the same time, what in my opinion doesn't make sense anyway.
 		 */
-		const allowedSpecialCharsArray = [...CHARACTERS_SPECIAL].filter((char) => {
-			if (customSpecialCharsType === 'whitelist') { return customSpecialChars.includes(char); }
+		const allowedSpecialCharsArray = [...CHARACTERS_SPECIAL].filter(char => {
+			if (customSpecialCharsType === 'whitelist') {
+				return customSpecialChars.includes(char);
+			}
 
 			return !customSpecialChars.includes(char);
 		});
@@ -55,16 +58,11 @@ function generateCharacterString(customSpecialChars: CustomSpecialChars = '',
 	const uppercaseWeightedString = CHARACTERS_UPPERCASE.repeat(weight.uppercase);
 	const lowercaseWeightedString = CHARACTERS_LOWERCASE.repeat(weight.lowercase);
 	const numbersWeightedString = CHARACTERS_NUMBERS.repeat(weight.numbers);
-	const allowedSpecialCharsLength =
-		allowedSpecialChars.length === 0 ? 1 : allowedSpecialChars.length;
-	const allowedSpecialCharsRepeat =
-		weight.special * (CHARACTERS_SPECIAL.length / allowedSpecialCharsLength);
+	const allowedSpecialCharsLength = allowedSpecialChars.length === 0 ? 1 : allowedSpecialChars.length;
+	const allowedSpecialCharsRepeat = weight.special * (CHARACTERS_SPECIAL.length / allowedSpecialCharsLength);
 	const specialWeightedString = allowedSpecialChars.repeat(allowedSpecialCharsRepeat);
 	const weightedCharsString =
-		uppercaseWeightedString +
-		lowercaseWeightedString +
-		numbersWeightedString +
-		specialWeightedString;
+		uppercaseWeightedString + lowercaseWeightedString + numbersWeightedString + specialWeightedString;
 
 	return weightedCharsString;
 }
@@ -74,7 +72,7 @@ export function cryptoRand(): number {
 	const randomBuffer = new Uint32Array(1);
 
 	crypto.getRandomValues(randomBuffer);
-	const max32BitNumber = 0xff_ff_ff_ff;
+	const max32BitNumber = 0xffffffff;
 
 	return randomBuffer[0] / (max32BitNumber + 1);
 }
@@ -96,11 +94,9 @@ const DEFAULT_OPTIONS: GeneratePWOptions = {
  * @param options password generate options
  * @returns {string} the generated password string
  */
-export function generatePassword(length: number, options = DEFAULT_OPTIONS) {
+export function generatePassword(length: number, options = DEFAULT_OPTIONS): string {
 	const { customSpecialChars, listType, weight } = options;
-	const characterString = generateCharacterString(customSpecialChars,
-		listType,
-		weight);
+	const characterString = generateCharacterString(customSpecialChars, listType, weight);
 	const fixLengthEmptyArray = Array.from({ length });
 	const passwordArray = fixLengthEmptyArray.map(() => {
 		const randINT = getRandomInt(characterString.length - 1);
@@ -120,7 +116,7 @@ export function generatePassword(length: number, options = DEFAULT_OPTIONS) {
  */
 export function syntaxHighlight(password: string): string {
 	const passwordArray = [...password];
-	const highlightedPasswordArray = passwordArray.map((char) => {
+	const highlightedPasswordArray = passwordArray.map(char => {
 		if (CHARACTERS_NUMBERS.includes(char)) {
 			return `<span class='number'>${char}</span>`;
 		}
@@ -142,4 +138,3 @@ export function syntaxHighlight(password: string): string {
 
 	return highlightedPasswordArray.join('');
 }
-
