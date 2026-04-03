@@ -4,9 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: token-generator
+    env_file:
+      - .env
     ports:
-      - "${APP_PORT}:3000"
-    environment:
-      - NODE_ENV=production
-      - PORT=3000
+      - '${APP_PORT}:3000'
     restart: unless-stopped
