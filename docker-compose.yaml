@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=$(git rev-parse --short HEAD)
+        - COMMIT_HASH=$COMMIT_HASH
     container_name: token-generator
     env_file:
       - .env
