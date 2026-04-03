@@ -45,7 +45,7 @@ function generateCharacterString(
 		 * overwriting the potentional given blacklist. This means you can't have a blacklist and a
 		 * whitelist at the same time, what in my opinion doesn't make sense anyway.
 		 */
-		const allowedSpecialCharsArray = [...CHARACTERS_SPECIAL].filter(char => {
+		const allowedSpecialCharsArray = [...CHARACTERS_SPECIAL].filter((char) => {
 			if (customSpecialCharsType === 'whitelist') {
 				return customSpecialChars.includes(char);
 			}
@@ -116,7 +116,7 @@ export function generatePassword(length: number, options = DEFAULT_OPTIONS): str
  */
 export function syntaxHighlight(password: string): string {
 	const passwordArray = [...password];
-	const highlightedPasswordArray = passwordArray.map(char => {
+	const highlightedPasswordArray = passwordArray.map((char) => {
 		if (CHARACTERS_NUMBERS.includes(char)) {
 			return `<span class='number'>${char}</span>`;
 		}
