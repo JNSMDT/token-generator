@@ -1,4 +1,4 @@
-FROM node:22-alpine AS builder
+FROM node:24-alpine AS builder
 
 # Install pnpm
 RUN npm install -g pnpm
@@ -20,7 +20,7 @@ RUN pnpm run build
 # Prune to production dependencies only
 RUN pnpm prune --prod
 
-FROM node:22-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
