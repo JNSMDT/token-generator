@@ -1,5 +1,4 @@
 FROM node:24-alpine AS builder
-
 # Install pnpm
 RUN npm install -g pnpm
 
@@ -13,7 +12,8 @@ RUN pnpm install
 
 # Copy the rest of the application code
 COPY . .
-
+ARG COMMIT_HASH
+ENV APP_REVISION=$COMMIT_HASH
 # Build the SvelteKit application
 RUN pnpm run build
 

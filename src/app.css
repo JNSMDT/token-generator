@@ -5,15 +5,19 @@
 
 .password {
 	& .uppercase {
-		--uno: "text-slate-900"
+		--uno: 'text-slate-900';
 	}
 	& .lowercase {
-		--uno: "text-slate-600"
+		--uno: 'text-slate-600';
 	}
 	& .special {
-		--uno: "text-red-500"
+		--uno: 'text-red-500';
 	}
 	& .number {
-		--uno: "text-blue-500"
+		--uno: 'text-blue-500';
 	}
+}
+
+input {
+	--uno: 'bg-transparent';
 }

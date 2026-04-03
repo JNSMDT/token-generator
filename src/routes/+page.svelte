@@ -1,24 +1,24 @@
 <script lang="ts">
-	import LockIcon from "$lib/assets/icons/lock-lucide.svg?component";
-	import SettingsIcon from "$lib/assets/icons/settings.svg?component";
-	import SyncIcon from "$lib/assets/icons/sync.svg?component";
-	import Signature from "$lib/components/signature.svelte";
-	import type { ListType } from "$lib/token/token";
-	import { CHARACTERS_SPECIAL, generatePassword as generateToken, syntaxHighlight } from "$lib/token/token";
+	import LockIcon from '$lib/assets/icons/lock-lucide.svg?component';
+	import SettingsIcon from '$lib/assets/icons/settings.svg?component';
+	import SyncIcon from '$lib/assets/icons/sync.svg?component';
+	import Signature from '$lib/components/signature.svelte';
+	import type { ListType } from '$lib/token/token';
+	import { CHARACTERS_SPECIAL, generatePassword as generateToken, syntaxHighlight } from '$lib/token/token';
 
-	type TokenType = "password" | "token";
+	type TokenType = 'password' | 'token';
 
 	let passwordLength = $state(30);
-	let generatedToken = $state("");
-	let customSpecialChars = $state("");
-	let listType: ListType = $state("whitelist");
-	let highlightedPassword = $state("");
-	let tokenType: TokenType = $state("password");
+	let generatedToken = $state('');
+	let customSpecialChars = $state('');
+	let listType: ListType = $state('whitelist');
+	let highlightedPassword = $state('');
+	let tokenType: TokenType = $state('password');
 	let showSettings = $state(false);
 	let inputLength = $state(30);
-	let inputSpecialChars = $state("");
-	let inputListType: ListType = $state("whitelist");
-	let copyButtonText = $state("Copy to Clipboard");
+	let inputSpecialChars = $state('');
+	let inputListType: ListType = $state('whitelist');
+	let copyButtonText = $state('Copy to Clipboard');
 
 	$effect(() => {
 		generateNewToken();
@@ -38,7 +38,7 @@
 	function generateHighlightedToken(): string {
 		const newToken = generateToken(passwordLength, {
 			customSpecialChars: CHARACTERS_SPECIAL,
-			listType: "blacklist",
+			listType: 'blacklist',
 		});
 
 		generatedToken = newToken;
@@ -47,28 +47,28 @@
 	}
 
 	function generateNewToken(): void {
-		if (tokenType === "password") {
+		if (tokenType === 'password') {
 			highlightedPassword = generateHighlightedPassword();
 		}
 
-		if (tokenType === "token") {
+		if (tokenType === 'token') {
 			highlightedPassword = generateHighlightedToken();
 		}
 	}
 
 	function handlePasswordButtonClick(): void {
-		tokenType = "password";
+		tokenType = 'password';
 	}
 
 	function handleTokenButtonClick(): void {
-		tokenType = "token";
+		tokenType = 'token';
 	}
 
 	function handleCopyButtonClick(): void {
 		navigator.clipboard.writeText(generatedToken);
-		copyButtonText = "Copied!";
+		copyButtonText = 'Copied!';
 		setTimeout(() => {
-			copyButtonText = "Copy to Clipboard";
+			copyButtonText = 'Copy to Clipboard';
 		}, 3000);
 	}
 
@@ -94,13 +94,13 @@
 		<div class="token-type-controls flex gap-15">
 			<button
 				class="token-button"
-				class:white-button={tokenType === "password"}
+				class:white-button={tokenType === 'password'}
 				onclick={handlePasswordButtonClick}
 				type="button">Password</button
 			>
 			<button
 				class="token-button"
-				class:white-button={tokenType === "token"}
+				class:white-button={tokenType === 'token'}
 				onclick={handleTokenButtonClick}
 				type="button">Token</button
 			>
@@ -116,7 +116,7 @@
 		<div class="user-controls flex gap-4 items-center">
 			<button
 				class="copy-button token-button"
-				class:animate-copy={copyButtonText === "Copied!"}
+				class:animate-copy={copyButtonText === 'Copied!'}
 				onclick={handleCopyButtonClick}
 				type="button"
 			>
@@ -162,17 +162,17 @@
 					/>
 					<button
 						class="px-1 border-1 border-black w-1lh"
-						class:bg-sky-500={inputListType === "whitelist"}
-						class:font-bold={inputListType === "whitelist"}
-						class:text-white={inputListType === "whitelist"}
-						onclick={() => (inputListType = "whitelist")}
+						class:bg-sky-500={inputListType === 'whitelist'}
+						class:font-bold={inputListType === 'whitelist'}
+						class:text-white={inputListType === 'whitelist'}
+						onclick={() => (inputListType = 'whitelist')}
 						type="button">W</button
 					>
 					<button
 						class="px-1 border-1 border-black w-1lh"
-						class:bg-sky-500={inputListType === "blacklist"}
-						class:font-bold={inputListType === "blacklist"}
-						onclick={() => (inputListType = "blacklist")}
+						class:bg-sky-500={inputListType === 'blacklist'}
+						class:font-bold={inputListType === 'blacklist'}
+						onclick={() => (inputListType = 'blacklist')}
 						type="button">B</button
 					>
 				</div>
@@ -186,10 +186,6 @@
 </div>
 
 <style>
-	:global(input) {
-		--uno: "bg-transparent";
-	}
-
 	.hidden {
 		display: none;
 	}
@@ -198,19 +194,19 @@
 		font-variant-numeric: slashed-zero tabular-nums;
 	}
 	.token-button {
-		--uno: "p-2 min-w-40 rounded-2 bg-sky-500 font-bold text-black text-xl shadow-sm";
+		--uno: 'p-2 min-w-40 rounded-2 bg-sky-500 font-bold text-black text-xl shadow-sm';
 
 		&.white-button {
-			--uno: "bg-white";
+			--uno: 'bg-white';
 		}
 	}
 	.user-controls {
 		.token-button {
-			--uno: "min-w-60";
+			--uno: 'min-w-60';
 		}
 
 		.icon-button {
-			--uno: "min-w-0";
+			--uno: 'min-w-0';
 		}
 	}
 

@@ -6,7 +6,18 @@ import { defineConfig } from 'vitest/config';
 import { execSync } from 'node:child_process';
 import { env } from 'node:process';
 
-const appRevision = execSync('git rev-parse HEAD').toString();
+function getAppRevision() {
+	if (env.APP_REVISION) {
+		return env.APP_REVISION;
+	}
+
+	try {
+		return execSync('git rev-parse HEAD').toString().trim();
+	} catch {
+		console.warn("Couldn't find AppRevision, default to unknown");
+		return 'unknown';
+	}
+}
 
 export default defineConfig({
 	build: {
@@ -19,8 +30,8 @@ export default defineConfig({
 		__APP_INFO__: JSON.stringify({
 			name: env.npm_package_name,
 			version: env.npm_package_version,
-			revision: appRevision,
-			abbrevRevision: appRevision.substring(0, 6),
+			revision: getAppRevision(),
+			abbrevRevision: getAppRevision().substring(0, 6),
 		}),
 	},
 	plugins: [

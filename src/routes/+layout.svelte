@@ -7,6 +7,8 @@
 	// make injected APP INFO to context
 	const appInfo: AppInfo = __APP_INFO__;
 	setContext('appInfo', appInfo);
+
+	console.log(appInfo);
 </script>
 
 <slot />

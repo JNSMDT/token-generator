@@ -7,7 +7,7 @@
 		"oxfmt": {
 			"initialization_options": {
 				"settings": {
-					"configPath": "app/.oxfmtrc.json",
+					"configPath": ".oxfmtrc.json",
 					"run": "onSave"
 				}
 			}
@@ -15,7 +15,7 @@
 		"oxlint": {
 			"initialization_options": {
 				"settings": {
-					"configPath": "app/.oxlintrc.json",
+					"configPath": ".oxlintrc.json",
 					"disableNestedConfig": false,
 					"fixKind": "safe_fix",
 					"run": "onType",
@@ -26,12 +26,6 @@
 		}
 	},
 	"languages": {
-		"Python": {
-			"code_actions_on_format": {
-				"source.organizeImports.ruff": true,
-				"source.fixAll.ruff": true
-			}
-		},
 		"CSS": {
 			"format_on_save": "on",
 			"prettier": {

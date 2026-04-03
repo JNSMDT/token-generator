@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - COMMIT_HASH=$(git rev-parse --short HEAD)
     container_name: token-generator
     env_file:
       - .env
