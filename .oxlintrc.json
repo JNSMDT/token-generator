@@ -6,20 +6,10 @@
 		"builtin": true,
 		"es2025": true
 	},
-	"ignorePatterns": [
-		"**/dist/**",
-		"**/node_modules/**",
-		"**/.svelte-kit/**",
-		"**/build/**"
-	],
+	"ignorePatterns": ["**/dist/**", "**/node_modules/**", "**/.svelte-kit/**", "**/build/**"],
 	"overrides": [
 		{
-			"files": [
-				"**/*.ts",
-				"**/*.tsx",
-				"**/*.mts",
-				"**/*.cts"
-			],
+			"files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
 			"rules": {
 				"getter-return": "off",
 				"no-class-assign": "off",
@@ -41,13 +31,16 @@
 			}
 		},
 		{
-			"files": [
-				"*.svelte",
-				"**/*.svelte"
-			],
+			"files": ["*.svelte", "**/*.svelte"],
 			"rules": {
 				"no-inner-declarations": "off",
-				"no-self-assign": "off"
+				"no-self-assign": "off",
+				"import/unambiguous": "off",
+				// Restriction
+				"oxc/no-optional-chaining": "off",
+				"oxc/bad-bitwise-operator": "error",
+				"oxc/no-barrel-file": "error",
+				"oxc/no-const-enum": "error"
 			}
 		}
 	],
@@ -55,34 +48,25 @@
 		"correctness": "error",
 		"suspicious": "error",
 		"perf": "warn",
-		"restriction": "error",
-		"style": "off"
+		"restriction": "warn",
+		"style": "warn",
+		"pedantic": "warn",
+		"nursery": "off"
 	},
-	"plugins": [
-		"typescript",
-		"unicorn",
-		"oxc",
-		"eslint",
-		"import",
-		"vitest"
-	],
+	"plugins": ["typescript", "unicorn", "oxc", "eslint", "import", "vitest"],
 	"rules": {
-		"indent": [
+		"indent": ["error", "tab"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "always"],
+		"arrow-parens": ["error", "as-needed"],
+		"no-unassigned-import": "off",
+		"oxc/no-rest-spread-properties": "off",
+		"oxc/no-async-await": "off",
+		"no-console": [
 			"error",
-			"tab"
-		],
-		"quotes": [
-			"error",
-			"single"
-		],
-		"semi": [
-			"error",
-			"always"
-		],
-		"arrow-parens": [
-			"error",
-			"as-needed"
-		],
-		"no-unassigned-import": "off"
+			{
+				"allow": ["error", "info"]
+			}
+		]
 	}
 }
