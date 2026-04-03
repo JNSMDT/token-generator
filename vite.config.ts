@@ -31,7 +31,7 @@ export default defineConfig({
 			name: env.npm_package_name,
 			version: env.npm_package_version,
 			revision: getAppRevision(),
-			abbrevRevision: getAppRevision().substring(0, 6),
+			abbrevRevision: getAppRevision().substring(0, 7),
 		}),
 	},
 	plugins: [
